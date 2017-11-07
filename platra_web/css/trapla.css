@@ -1,0 +1,72 @@
+.navbar {
+  background-color: transparent;
+  height: 80px;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  color: #414141;
+}
+.navbar-brand {
+  height: 80px;
+}
+.logo {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 100%;
+}
+.nav-link {
+  color: #414141;
+}
+.nav-link:hover {
+  color: #D6322D;
+}
+.landing {
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Roboto', sans-serif;
+}
+.landing h1 {
+  font-size: 4rem;
+  color: #D6322D;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+.landing hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.landing p {
+  font-size: 1.7rem;
+}
+.form-destination {
+  margin-top: 25px;
+  height: 80px;
+  border: 1px solid #D6D6D6;
+  border-radius: 4px;
+}
+.form-destination .fa {
+  padding-left: 20px;
+  color: #D6D6D6;
+}
+.row-destination {
+  height: 100%;
+}
+.input-destination {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+.btn-search {
+  background-color: #D6322D;
+  color: #fff;
+}
+.input-date {
+  border: 1px solid #D6D6D6;
+  border-radius: 4px;
+}
+.plan {
+  height: 100vh;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
