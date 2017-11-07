@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>TraPla - Plan your Travel</title>
+    <title>PLATRA - Plan your Travel</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,8 +15,8 @@
     <!-- Icons -->
     <link rel="stylesheet" href="css/fa/css/font-awesome.min.css">
 
-    <!-- TraPla Css -->
-    <link rel="stylesheet" type="text/css" href="css/trapla.css">
+    <!-- PlaTra Css -->
+    <link rel="stylesheet" type="text/css" href="css/platra.css">
 
 
 
@@ -35,12 +35,30 @@
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 		    <ul class="navbar-nav ml-auto">
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Sign up</a>
+		      <li class="nav-item dropdown">
+		        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Sign up
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		        	<label>E-Mail</label>
+		          <input type="" name="">
+		          <label>Password</label>
+		          <input type="" name="">
+		        </div>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Sign in</a>
+
+		      <li class="nav-item dropdown">
+		        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Sign in
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		        	<label>E-Mail</label>
+		          <input type="" name="">
+		          <label>Password</label>
+		          <input type="" name="">
+		        </div>
 		      </li>
+
 		    </ul>
 
 		  </div>
@@ -51,18 +69,18 @@
       <div class="container my-auto">
         <div class="row">
           <div class="col-8 offset-2">
-          	<h1>TraPla</h1>
+          	<h1>PlaTra</h1>
           	<p>Let us help to plan your holiday</p>
           	<p>We create a timetable with attractions, events, and points of intresst for you, which you can than edit and store.</p>
 
           	<div class="row">
           		<div class="col-6">
           			<label for="arrivaltime">arrival time</label>
-          			<input class="input-date form-control"type="" name="" placeholder="mm/dd/yyyy" id="arrivaltime">
+          			<input data-toggle="datepicker" class="input-date form-control"type="" name="" placeholder="mm/dd/yyyy" id="arrivaltime">
           		</div>
           		<div class="col-6">
           			<label for="departuretime">departure time</label>
-          			<input class="input-date form-control"type="" name="" placeholder="mm/dd/yyyy" id="departuretime">
+          			<input data-toggle="datepicker" class="input-date form-control"type="" name="" placeholder="mm/dd/yyyy" id="departuretime">
           		</div>
           	</div>
 
@@ -77,7 +95,7 @@
           						<input class="input-destination" type="" name="" placeholder="Enter for example 'Innsbruck'">
           					</div>
           					<div class="col-2 my-auto mx-auto">
-          						<button class="btn btn-search">Search</button>
+          						<button class="btn btn-search" href="" >Search</button>
           					</div>
           				</div>
           			</form>
@@ -90,15 +108,15 @@
       </div>
     </header>
 
-    <section class="plan">
-    	
-    </section>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- Datepicker -->
+    <script type="text/javascript" src="js/datepicker/datepicker.min.js"></script>
+    <!-- PlaTra Js -->
+    <script type="text/javascript" src="js/platra.js"></script>
   </body>
 </html>
