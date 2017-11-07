@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #fff;
+  background-color: transparent;
   height: 80px;
   padding-left: 5vw;
   padding-right: 5vw;
@@ -20,7 +20,7 @@
   color: #FD7755;
 }
 .landing {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   font-family: 'Roboto', sans-serif;
 }
@@ -36,6 +36,17 @@
 }
 .landing p {
   font-size: 1.7rem;
+}
+.btn-primary {
+  background-color: #FD7755;
+  color: #fff;
+  border-color: #FD7755;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: #FD7755;
+  color: #fff;
+  border-color: #FD7755;
 }
 .form-destination {
   margin-top: 25px;
@@ -54,10 +65,6 @@
   height: 100%;
   width: 100%;
   border: none;
-}
-.btn-search {
-  background-color: #FD7755;
-  color: #fff;
 }
 .input-date {
   border: 1px solid #D6D6D6;
@@ -242,6 +249,11 @@
 }
 .datepicker-hide {
   display: none;
+}
+.dropdown-menu {
+  width: 400px;
+  border-top: 1px solid #FD7755;
+  border-radius: 0;
 }
 textarea:focus,
 input:focus {
