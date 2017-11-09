@@ -1,5 +1,5 @@
 app:
-  build: platra/ 
+  build: platra_api/ 
   command: rails server -p 3000 -b '0.0.0.0'
   links:
     - db
