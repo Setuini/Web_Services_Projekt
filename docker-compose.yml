@@ -4,7 +4,7 @@ app:
   links:
     - db
   volumes:
-    - platra/:/app
+    - platra_api/:/app
   ports:
     - "3000:3000"
 
