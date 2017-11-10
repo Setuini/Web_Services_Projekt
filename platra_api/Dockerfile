@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /app 
 WORKDIR /app
 
+# Add a /app volume
+VOLUME ["/app"]
+
 # Copy the Gemfile as well as the Gemfile.lock and install 
 # the RubyGems. This is a separate step so the dependencies 
 # will be cached unless changes to one of those two files 
