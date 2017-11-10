@@ -1,1 +1,6 @@
-$('[data-toggle="datepicker"]').datepicker();
+$( document ).ready(function() {
+    $('[data-toggle="datepicker"]').datepicker();
+
+});
+
+
