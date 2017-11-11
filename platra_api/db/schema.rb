@@ -10,23 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171110123022) do
+ActiveRecord::Schema.define(version: 20171111171059) do
 
   create_table "point_of_interests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "time_table_id"
     t.string "longitude"
     t.string "latitude"
-    t.string "begin"
-    t.string "end"
     t.string "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["time_table_id"], name: "fk_rails_c89e2923a6"
+  end
+
+  create_table "time_table_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "time_table_id"
+    t.datetime "begin"
+    t.datetime "end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["time_table_id"], name: "fk_rails_950a206353"
   end
 
   create_table "time_tables", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
     t.bigint "user_id"
+    t.string "name"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "fk_rails_4669d9d4d1"
@@ -40,6 +46,6 @@ ActiveRecord::Schema.define(version: 20171110123022) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "point_of_interests", "time_tables"
+  add_foreign_key "time_table_entries", "time_tables"
   add_foreign_key "time_tables", "users"
 end
