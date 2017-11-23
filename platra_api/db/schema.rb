@@ -13,39 +13,42 @@
 ActiveRecord::Schema.define(version: 20171111171059) do
 
   create_table "point_of_interests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "longitude"
-    t.string "latitude"
+    t.string "longitude", null: false
+    t.string "latitude", null: false
     t.string "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "time_table_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "time_table_id"
-    t.datetime "begin"
-    t.datetime "end"
+    t.bigint "time_table_id", null: false
+    t.bigint "point_of_interest_id", null: false
+    t.datetime "begin", null: false
+    t.datetime "end", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["point_of_interest_id"], name: "fk_rails_be1caa74d8"
     t.index ["time_table_id"], name: "fk_rails_950a206353"
   end
 
   create_table "time_tables", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
-    t.string "name"
-    t.string "location"
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "location", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "fk_rails_4669d9d4d1"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "email"
-    t.string "password"
+    t.string "email", null: false
+    t.string "password", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "time_table_entries", "point_of_interests"
   add_foreign_key "time_table_entries", "time_tables"
   add_foreign_key "time_tables", "users"
 end
