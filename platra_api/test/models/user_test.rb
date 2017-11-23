@@ -1,3 +1,4 @@
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   test 'create user without password' do
@@ -6,6 +7,7 @@ class UserTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       u.save
     end
+    puts("Nutzer ohne Passwort nicht angelegt.")
   end
 
   test 'create user without email' do
@@ -14,14 +16,9 @@ class UserTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       u.save
     end
+    puts("Nutzer ohne Email nicht angelegt.")
   end
 
-  test 'create user' do
-    u = User.new
-    u.password = "test"
-    u.email = "test@test.com"
-    assert u.save, "Nutzer erfolgreich angelegt"
-  end
 
   test 'create user with same email' do
     u = User.new
@@ -30,6 +27,15 @@ class UserTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       u.save
     end
+    puts("Nutzer mit gleicher Email nicht angelegt.")
+  end
+
+  test 'create user' do
+    u = User.new
+    u.password = "test"
+    u.email = "test@test1.com"
+    assert u.save
+    puts("Nutzer erfolgreich angelegt.")
   end
 
 end
