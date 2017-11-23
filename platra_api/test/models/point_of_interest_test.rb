@@ -1,7 +1,26 @@
-require 'test_helper'
+
 
 class PointOfInterestTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'create pointOfInterest without latitude' do
+    p = PointOfInterest.new
+    p.longitude = 1
+    assert_raises(Exception) do
+      t.save
+    end
+  end
+
+  test 'create pointOfInterest without longitude' do
+    p = PointOfInterest.new
+    p.latitude = 1
+    assert_raises(Exception) do
+      t.save
+    end
+  end
+
+  test 'create pointOfInterest' do
+    p = PointOfInterest.new
+    p.longitude = 1
+    p.latitude = 1
+    assert p.save, "PointOfInterest erfolgreich angelegt"
+  end
 end
