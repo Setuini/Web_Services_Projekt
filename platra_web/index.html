@@ -91,7 +91,7 @@
           <div class="col-lg-8 offset-lg-2">
           	<h1>PlaTra</h1>
           	<p>Let us help to plan your holiday</p>
-          	<p>We create a timetable with attractions, events, and points of intresst for you, which you can than edit and store.</p>
+          	<p>We create a timetable with restaurants and points of interest for you, which you can than edit and store.</p>
 
           	<div class="row">
           		<div class="col-sm-12 col-lg-6">
@@ -112,15 +112,16 @@
           						<i class="fa fa-search" aria-hidden="true"></i>
           					</div>
           					<div class="col-sm-11 col-lg-9 ">
-          						<input class="input-destination" type="" name="" placeholder="Enter for example 'Innsbruck'">
+          						<input id="autocomplete" class="input-destination" type="text"  placeholder="Enter for example 'Innsbruck'">
           					</div>
-          					<div class="col-lg-2 my-auto mx-auto">
-          						<button class="btn btn-primary hidden-lg-down" href="" >Search</button>
+          					<div class="col-lg-2 my-auto mx-auto hidden-lg-down">
+          						<button class="btn btn-primary " href="" >Search</button>
           					</div>
           				</div>
           			</form>
           		</div>
           	</div>
+
 
             
           </div>
@@ -128,6 +129,34 @@
       </div>
     </header>
 
+    <!-- Autocomplete -->
+    <div id="map" style="display: none"></div>
+    <div style="display: none">
+      <div id="info-content">
+        <table>
+          <tr id="iw-url-row" class="iw_table_row">
+            <td id="iw-icon" class="iw_table_icon"></td>
+            <td id="iw-url"></td>
+          </tr>
+          <tr id="iw-address-row" class="iw_table_row">
+            <td class="iw_attribute_name">Address:</td>
+            <td id="iw-address"></td>
+          </tr>
+          <tr id="iw-phone-row" class="iw_table_row">
+            <td class="iw_attribute_name">Telephone:</td>
+            <td id="iw-phone"></td>
+          </tr>
+          <tr id="iw-rating-row" class="iw_table_row">
+            <td class="iw_attribute_name">Rating:</td>
+            <td id="iw-rating"></td>
+          </tr>
+          <tr id="iw-website-row" class="iw_table_row">
+            <td class="iw_attribute_name">Website:</td>
+            <td id="iw-website"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -138,5 +167,12 @@
     <script type="text/javascript" src="js/datepicker/datepicker.min.js"></script>
     <!-- PlaTra Js -->
     <script type="text/javascript" src="js/platra.js"></script>
+
+    <!-- Autocomplete -->
+    <script type="text/javascript" src="js/auto.js"></script>
+
+    <!-- Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEQDddN10DQYKOs6_C7s6jm9UDxAEn0_0&libraries=places&callback=initMap" async defer></script>
+
   </body>
 </html>
