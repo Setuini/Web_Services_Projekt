@@ -52,7 +52,7 @@ digraph G {
         edge [
                 arrowhead = "none"
 
-                headlabel = "0..*"
+                headlabel = "1"
                 taillabel = "0..*"
         ]
 
@@ -86,6 +86,8 @@ digraph G {
 | Get travel plan based on location, | POST /api/v1/plan        |
 | arrival and departure time         |                          |
 | Save travel plan                   | POST /api/v1/plan/save   |
+| Get all travel plans               | GET /api/v1/plans        |
+| Get travel plan by id              | GET /api/v1/plan/[id]    |
 | Change travel plan                 | PUT /api/v1/plan/[id]    |
 | Delete travel plan                 | DELETE /api/v1/plan/[id] |
 
