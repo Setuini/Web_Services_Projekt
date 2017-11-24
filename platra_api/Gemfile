@@ -9,7 +9,7 @@ end
 gem 'devise'
 
 # Set correct headers 
-gem 'rack-cors'
+#gem 'rack-cors'
 # Use MySQL as db
 gem 'mysql2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

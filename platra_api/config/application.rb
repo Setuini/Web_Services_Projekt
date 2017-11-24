@@ -22,12 +22,12 @@ module Platra
         'Access-Control-Allow-Headers:' => 'Origin, X-Requested-With, Content-Type, Accept'
     }
 
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
-      end
-    end
+    #config.middleware.insert_before 0, "Rack::Cors" do
+      #allow do
+        #origins '*'
+        #resource '*', :headers => :any, :methods => [:get, :post, :options]
+      #end
+    #end
 
   end
 end
