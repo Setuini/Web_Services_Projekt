@@ -78,18 +78,20 @@ digraph G {
 | Register                | POST /api/v1/user/register |
 | Get user information    | GET  /api/v1/user/[id]     |
 | Update user information | PUT  /api/v1/user/[id]     |
+| Delete user             | DELETE  /api/v1/user/[id]  |
 
 # Routes - Travel plan
 
-| Action                             | Example URI              |
-|------------------------------------|--------------------------|
-| Get travel plan based on location, | POST /api/v1/plan        |
-| arrival and departure time         |                          |
-| Save travel plan                   | POST /api/v1/plan/save   |
-| Get all travel plans               | GET /api/v1/plans        |
-| Get travel plan by id              | GET /api/v1/plan/[id]    |
-| Change travel plan                 | PUT /api/v1/plan/[id]    |
-| Delete travel plan                 | DELETE /api/v1/plan/[id] |
+| Action                             | Example URI                 |
+|------------------------------------|-----------------------------|
+| Get travel plan based on location, | POST /api/v1/plan           |
+| arrival and departure time         |                             |
+| Save travel plan                   | POST /api/v1/plan/save      |
+| Get all travel plans               | GET /api/v1/plans           |
+| Get travel plan by id              | GET /api/v1/plan/[id]       |
+| Get info about point of interest   | GET /api/v1/plan/point/[id] |
+| Change travel plan                 | PUT /api/v1/plan/[id]       |
+| Delete travel plan                 | DELETE /api/v1/plan/[id]    |
 
 # User scenarios 
 
