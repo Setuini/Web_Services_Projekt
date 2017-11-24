@@ -16,9 +16,9 @@ http://localhost:3000
 
 ## Run Tests
 
-...
+```
 $ docker-compose run app rails test
-...
+```
 
 ## Run phpMyAdmin
 
