@@ -25,6 +25,7 @@ $ docker-compose run app rails test
 ```
 $ cd platra_web_reactjs_rewrite
 $ npm start
+http://localhost:3000
 ```
 
 ## Run phpMyAdmin
