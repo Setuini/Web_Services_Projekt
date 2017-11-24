@@ -5,6 +5,7 @@
 ```
 $ docker-compose up
 $ docker-compose run app rake db:create
+$ docker-compose run app rake db:migrate
 ```
 
 ## Run Platra
@@ -12,6 +13,12 @@ $ docker-compose run app rake db:create
 ```
 http://localhost:3000
 ```
+
+## Run Tests
+
+...
+$ docker-compose run app rails test
+...
 
 ## Run phpMyAdmin
 
