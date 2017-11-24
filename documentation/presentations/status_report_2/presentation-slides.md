@@ -93,9 +93,11 @@ digraph G {
 
 # User scenarios 
 
-- Initial travel planning    
+- Login / Logout   
 
-- Change travel plan 
+- Register
+
+-  
 
 - 
 
