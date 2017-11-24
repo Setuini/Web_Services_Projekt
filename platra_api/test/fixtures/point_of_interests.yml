@@ -6,5 +6,6 @@
 #
 one:
   id: 1
+  name: McDonalds
   longitude: 1
   latitude: Trip2017
