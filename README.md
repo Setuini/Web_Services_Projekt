@@ -20,6 +20,13 @@ http://localhost:3000
 $ docker-compose run app rails test
 ```
 
+## Run React Frontend
+
+```
+$ cd platra_web_reactjs_rewrite
+$ npm start
+```
+
 ## Run phpMyAdmin
 
 ```
