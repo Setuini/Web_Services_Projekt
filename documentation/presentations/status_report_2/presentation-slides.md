@@ -97,9 +97,9 @@ digraph G {
 
 - Register
 
--  
+- Plan your travel  
 
-- 
+- Lookup past travels 
 
 # 
 
