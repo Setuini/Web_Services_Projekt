@@ -1,4 +1,4 @@
-
+require 'test_helper'
 
 class PointOfInterestTest < ActiveSupport::TestCase
   test 'create pointOfInterest without latitude' do
@@ -7,6 +7,7 @@ class PointOfInterestTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       t.save
     end
+    puts("PointOfInterest ohne Längengrad nicht angelegt.")
   end
 
   test 'create pointOfInterest without longitude' do
@@ -15,12 +16,14 @@ class PointOfInterestTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       t.save
     end
+    puts("PointOfInterest ohne Breitengrad nicht angelegt.")
   end
 
   test 'create pointOfInterest' do
     p = PointOfInterest.new
     p.longitude = 1
     p.latitude = 1
-    assert p.save, "PointOfInterest erfolgreich angelegt"
+    assert p.save
+    puts("PointOfInterest erfolgreich angelegt.")
   end
 end

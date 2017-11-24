@@ -4,8 +4,9 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  id: 1
+  time_table_id: 1
+  point_of_interest_id: 1
+  begin: 2017-11-24 00:00:00
+  end:  2017-11-24 01:00:00

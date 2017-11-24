@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.datetime "end", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["point_of_interest_id"], name: "fk_rails_be1caa74d8"
+    t.index ["point_of_interest_id", "begin", "end"], name: "my_index", unique: true
     t.index ["time_table_id"], name: "fk_rails_950a206353"
   end
 

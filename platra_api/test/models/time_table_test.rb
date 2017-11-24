@@ -1,4 +1,4 @@
-
+require 'test_helper'
 
 class TimeTableTest < ActiveSupport::TestCase
   test 'create timetable without user' do
@@ -8,6 +8,7 @@ class TimeTableTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       t.save
     end
+    puts("TimeTable ohne User nicht angelegt.")
   end
 
   test 'create timetable without location' do
@@ -18,6 +19,7 @@ class TimeTableTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       t.save
     end
+    puts("TimeTable ohne Location nicht angelegt.")
   end
 
   test 'create timetable without name' do
@@ -28,6 +30,7 @@ class TimeTableTest < ActiveSupport::TestCase
     assert_raises(Exception) do
       t.save
     end
+    puts("TimeTable ohne Name nicht angelegt.")
   end
 
   test 'create timetable' do
@@ -36,7 +39,8 @@ class TimeTableTest < ActiveSupport::TestCase
     t.user_id = u.id
     t.location = "Innsbruck"
     t.name ="Trip2017"
-    assert t.save, "Timetable erfolgreich angelegt"
+    assert t.save
+    puts("TimeTable erfolgreich angelegt.")
   end
 
 end

@@ -9,5 +9,7 @@ class CreateTimeTableEntries < ActiveRecord::Migration[5.1]
     end
     add_foreign_key :time_table_entries, :time_tables
     add_foreign_key :time_table_entries, :point_of_interests
+    add_index :time_table_entries, [:point_of_interest_id,:begin,:end], unique: true, :name => 'my_index'
+
   end
 end
