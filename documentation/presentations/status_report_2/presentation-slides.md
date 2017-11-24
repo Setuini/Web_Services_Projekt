@@ -52,8 +52,8 @@ digraph G {
         edge [
                 arrowhead = "none"
 
-                headlabel = "1"
-                taillabel = "0..*"
+                headlabel = "0..*"
+                taillabel = "1"
         ]
 
         TimeTable -> TimeTableEntry 
