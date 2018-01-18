@@ -1,15 +1,26 @@
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom'
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
-export class Navbar_Platra extends React.Component {
+import { DropdownLogin } from './DropdownLogin.js';
 
+export class NavbarPlatra extends React.Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
-    this.state = { isOpen: false };
-  }
 
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -18,24 +29,21 @@ export class Navbar_Platra extends React.Component {
 
   render() {
     return (
-      <Navbar color="faded" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className="ml-auto" navbar>
+      <div>
+        <Navbar color="faded" light expand="md">
+          <NavbarBrand href="/timetable">Platra</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              
+              <DropdownLogin/>
+              <DropdownLogin/>
 
-            <NavItem>
-              <NavLink><li><Link to="/timetable">Timetable</Link></li></NavLink>
-            </NavItem>
 
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
-            </NavItem>
-            
-          </Nav>
-        </Collapse>
-      </Navbar>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
     );
   }
-
 }

@@ -1,14 +1,10 @@
 import React from 'react';
-import { Row, Col, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom'
-
+import { Row, Col } from 'reactstrap';
 
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import PlacesAutocomplete from 'react-places-autocomplete';
-import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 
 
 export class Search extends React.Component {
@@ -43,11 +39,6 @@ export class Search extends React.Component {
   }
 
   render() {
-    return 
-  }
-
-
-  render() {
     return (
       <div>
 
@@ -58,27 +49,27 @@ export class Search extends React.Component {
         <form id="search-form">
           <Row>
               <Col xs="12" lg="6">
-                  <label for="arrivaltime">arrival time</label>
+                  <label>arrival time</label>
                   <DatePicker selected={this.state.startDate} onChange={this.setStart} className="Date-Input form-control" dateFormat="DD/MM/YYYY"/>
               </Col>
               <Col xs="12" lg="6">
-                  <label for="departuretime">departure time</label>
+                  <label>departure time</label>
                   <DatePicker selected={this.state.endDate} onChange={this.setEnd} className="Date-Input form-control" dateFormat="DD/MM/YYYY" includeDates={this.state.includeDays}/>
               </Col>
           </Row>
 
           <Row>
               <Col xs="12">
-                  <div class="form-destination">
-                      <div class="row row-destination">
-                          <div class="col-1 my-auto mx-auto">
-                              <i class="fa fa-search" aria-hidden="true"></i>
+                  <div className="form-destination">
+                      <div className="row row-destination">
+                          <div className="col-1 my-auto mx-auto">
+                              <i className="fa fa-search" aria-hidden="true"></i>
                           </div>
-                          <div class="col-sm-11 col-lg-9 ">
-                              <input id="autocomplete" class="input-destination" type="text" name="city" placeholder="Enter for example 'Innsbruck'"/>
+                          <div className="col-sm-11 col-lg-9 ">
+                              <input id="autocomplete" className="input-destination" type="text" name="city" placeholder="Enter for example 'Innsbruck'"/>
                           </div>
-                          <div class="col-lg-2 my-auto mx-auto hidden-lg-down">
-                              <input class="btn btn-primary" type="submit" id="search-btn" value="Search"/>
+                          <div className="col-lg-2 my-auto mx-auto hidden-lg-down">
+                              <input className="btn btn-primary" type="submit" id="search-btn" value="Search"/>
                           </div>
                       </div>
                   </div>

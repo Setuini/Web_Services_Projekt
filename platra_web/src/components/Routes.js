@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 
 import { Landing } from './Landing.js';
 import { Timetable } from './Timetable.js';
-import App from '../App.js';
 
 
 export class Routes extends Component {

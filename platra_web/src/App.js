@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router} from 'react-router-dom'
-import {Navbar_Platra} from './components/Navbar.js';
+import {NavbarPlatra} from './components/Navbar.js';
 import {Routes} from './components/Routes.js';
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-            <Navbar_Platra/>
+            <NavbarPlatra/>
             <Routes/>
           </div>
         </Router>
