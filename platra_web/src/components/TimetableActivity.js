@@ -22,7 +22,7 @@ export class TimetableActivity extends React.Component {
 
     console.log("Fetch");
 
-		fetch("https://jsonplaceholder.typicode.com/posts/1",{
+		fetch("https://jsonplaceholder.typicode.com/photos/1",{
         method: 'GET',
         headers: myHeaders,
         mode: 'cors'
@@ -33,8 +33,10 @@ export class TimetableActivity extends React.Component {
     .then((resdata) => {
       this.setState({
       	heading: JSON.stringify(resdata.title),
-      	desc: JSON.stringify(resdata.body)
+      	//desc: JSON.stringify(resdata.body),
+      	img: resdata.url
       });
+
     })
     .catch( (ex) => {
       console.log("Fetch failed" + ex);
@@ -46,7 +48,7 @@ export class TimetableActivity extends React.Component {
   render() {
     return (
       <div>
-      	<img className="activity-img" src="#" alt=""/>
+      	<img className="activity-img" src={this.state.img} alt=""/>
       	<h3 className="activity-heading"> {this.state.heading} </h3>
       	<p className="activity-description">{this.state.desc}</p>
       </div>
