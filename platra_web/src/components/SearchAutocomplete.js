@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import {Map, MapContainer, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { FontAwesome } from 'react-fontawesome';
+import { Link } from 'react-router-dom'
 
 export class SearchAutocomplete extends Component {
   constructor(props) {
-    super(props)
-    this.state = { address: '' }
+    super(props);
+    this.state = {
+      address: ''
+    }
     this.onChange = (address) => this.setState({ address })
   }
 
@@ -17,6 +20,8 @@ export class SearchAutocomplete extends Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error))
+
+
   }
 
   render() {
@@ -29,6 +34,8 @@ export class SearchAutocomplete extends Component {
     return (
 
       <form onSubmit={this.handleFormSubmit}>
+
+        <h1>{this.state.startDate} {this.state.endDate}</h1>
         <div className="row row-destination">
             <div className="col-1 my-auto mx-auto">
                 <i className="fa fa-search" aria-hidden="true"></i>
@@ -37,7 +44,7 @@ export class SearchAutocomplete extends Component {
                <PlacesAutocomplete inputProps={inputProps} className="input-destination"/>
             </div>
             <div className="col-lg-2 my-auto mx-auto hidden-lg-down">
-                <input className="btn btn-primary button-platra" type="submit" id="search-btn" value="Search"/>
+                <Link to="/timetable"><input className="btn btn-primary button-platra" type="submit" id="search-btn" value="Search"/></Link>
             </div>
         </div>
       </form>
