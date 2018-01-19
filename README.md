@@ -25,7 +25,7 @@ $ docker-compose run app rails test
 ```
 $ cd platra_web
 $ npm start
-http://localhost:3000
+http://localhost:3001
 ```
 
 ## Compile less files to css
