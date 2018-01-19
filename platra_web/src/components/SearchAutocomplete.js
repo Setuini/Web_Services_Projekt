@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {Map, MapContainer, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import { FontAwesome } from 'react-fontawesome';
 import { Link } from 'react-router-dom'
 
 export class SearchAutocomplete extends Component {
@@ -20,8 +18,6 @@ export class SearchAutocomplete extends Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error))
-
-
   }
 
   render() {
@@ -33,7 +29,7 @@ export class SearchAutocomplete extends Component {
 
     return (
 
-      <form onSubmit={this.handleFormSubmit}>
+      <div onSubmit={this.handleFormSubmit}>
 
         <h1>{this.state.startDate} {this.state.endDate}</h1>
         <div className="row row-destination">
@@ -47,7 +43,7 @@ export class SearchAutocomplete extends Component {
                 <Link to="/timetable"><input className="btn btn-primary button-platra" type="submit" id="search-btn" value="Search"/></Link>
             </div>
         </div>
-      </form>
+      </div>
     )
   }
 

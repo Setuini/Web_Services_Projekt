@@ -1,11 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { Search } from './Search.js';
-import { SearchAutocomplete } from './SearchAutocomplete.js';
 
 export class Landing extends React.Component {
-
-
 
   render() {
     return (

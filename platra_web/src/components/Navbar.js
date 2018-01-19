@@ -1,17 +1,6 @@
 import React from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav } from 'reactstrap';
 import { Link } from 'react-router-dom'
-import { DropdownLogin } from './DropdownLogin.js';
 
 export class NavbarPlatra extends React.Component {
   constructor(props) {
@@ -32,13 +21,13 @@ export class NavbarPlatra extends React.Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand><Link to="/">Platra</Link></NavbarBrand>
+         <Link to="/" className="navbar-brand">Platra</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
 
-              <NavLink><li><Link to="/login">Login</Link></li></NavLink>
-              <NavLink><li><Link to="/register">Register</Link></li></NavLink>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/register" className="nav-link">Register</Link>
               
             </Nav>
           </Collapse>
