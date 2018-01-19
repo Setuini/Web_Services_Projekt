@@ -5,7 +5,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 export class SearchAutocomplete extends Component {
   constructor(props) {
     super(props)
-    this.state = { address: 'San Francisco, CA' }
+    this.state = { address: 'Fucking, Österreich' }
     this.onChange = (address) => this.setState({ address })
   }
 
