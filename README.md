@@ -23,9 +23,16 @@ $ docker-compose run app rails test
 ## Run React Frontend
 
 ```
-$ cd platra_web_reactjs_rewrite
+$ cd platra_web
 $ npm start
 http://localhost:3000
+```
+
+## Compile less files to css
+
+```
+$ cd platra_web/src/less
+$ lessc platra.less platra.css
 ```
 
 ## Run phpMyAdmin
