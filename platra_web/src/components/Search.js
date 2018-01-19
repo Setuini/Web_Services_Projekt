@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import { SearchAutocomplete } from './SearchAutocomplete.js'
 
 
 
@@ -61,17 +62,7 @@ export class Search extends React.Component {
           <Row>
               <Col xs="12">
                   <div className="form-destination">
-                      <div className="row row-destination">
-                          <div className="col-1 my-auto mx-auto">
-                              <i className="fa fa-search" aria-hidden="true"></i>
-                          </div>
-                          <div className="col-sm-11 col-lg-9 ">
-                              <input id="autocomplete" className="input-destination" type="text" name="city" placeholder="Enter for example 'Innsbruck'"/>
-                          </div>
-                          <div className="col-lg-2 my-auto mx-auto hidden-lg-down">
-                              <input className="btn btn-primary" type="submit" id="search-btn" value="Search"/>
-                          </div>
-                      </div>
+                    <SearchAutocomplete/>
                   </div>
               </Col>
           </Row>

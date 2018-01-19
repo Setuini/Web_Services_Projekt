@@ -8,8 +8,9 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
-
+  DropdownItem,
+  NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom'
 import { DropdownLogin } from './DropdownLogin.js';
 
 export class NavbarPlatra extends React.Component {
@@ -31,15 +32,14 @@ export class NavbarPlatra extends React.Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/timetable">Platra</NavbarBrand>
+          <NavbarBrand><Link to="/">Platra</Link></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+
+              <NavLink><li><Link to="/login">Login</Link></li></NavLink>
+              <NavLink><li><Link to="/register">Register</Link></li></NavLink>
               
-              <DropdownLogin/>
-              <DropdownLogin/>
-
-
             </Nav>
           </Collapse>
         </Navbar>
