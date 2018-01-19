@@ -7,21 +7,25 @@ export class LoginPage extends React.Component {
     return (
       <Container>
         <Row>
-          <Col lg='5'>
-            <Form>
-
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="exampleEmail" className="mr-sm-2">Email</Label>
-                <Input type="email" name="email" id="exampleEmail" placeholder="fritz.fantom@uibk.at" />
+          <Col lg={{ size: 6, offset: 3 }} sm={{ size: 10, offset: 1}} className="vh-80 d-flex align-items-center">
+            <Form className="col-12">
+              <FormGroup>
+                <Input type="email" name="email" placeholder="E-Mail-Address" />
               </FormGroup>
-
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="examplePassword" className="mr-sm-2">Password</Label>
-                <Input type="password" name="password" id="examplePassword" placeholder="password" />
+              <FormGroup>
+                <Input type="email" name="password" placeholder="Password" />
               </FormGroup>
-              <Button>Login</Button>
+              <Row>
+                <FormGroup check className="col-6">
+                  <Label className="checkbox" check>
+                    <Input type="checkbox"/>{' '}
+                    Stay logged in
+                  </Label>
+                </FormGroup>
+                <a href="/" className='col-6 text-right'>Forgot your password?</a>
+              </Row>
+              <Button block className="button-platra">Login</Button>
             </Form>
-
           </Col>
         </Row>
       </Container>

@@ -55,7 +55,7 @@ export class Search extends React.Component {
               </Col>
               <Col xs="12" lg="6">
                   <label>departure time</label>
-                  <DatePicker selected={this.state.endDate} onChange={this.setEnd} className="Date-Input form-control" dateFormat="DD/MM/YYYY" includeDates={this.state.includeDays}/>
+                  <DatePicker selected={this.state.endDate} onChange={this.setEnd} className="Date-Input form-control" dateFormat="DD/MM/YYYY"/>
               </Col>
           </Row>
 

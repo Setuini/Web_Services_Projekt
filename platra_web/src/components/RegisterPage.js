@@ -7,33 +7,30 @@ export class RegisterPage extends React.Component {
     return (
       <Container>
         <Row>
-          <Col lg='5'>
-            <Form>
-
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="exampleEmail" className="mr-sm-2">Name</Label>
-                <Input type="email" name="email" id="exampleEmail" placeholder="fritz.fantom@uibk.at" />
+          <Col lg={{ size: 6, offset: 3 }} sm={{ size: 10, offset: 1}} className="vh-80 d-flex align-items-center">
+            <Form className="col-12">
+              <FormGroup>
+                <Input type="text" name="name" placeholder="Full Name" />
+              </FormGroup>
+               <FormGroup>
+                <Input type="email" name="email" placeholder="E-Mail-Address" />
+              </FormGroup>
+              <FormGroup>
+                <Input type="email" name="password" placeholder="Password" />
+              </FormGroup>
+              <FormGroup>
+                <Input type="email" name="password" placeholder="Password confirmation" />
               </FormGroup>
             
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="exampleEmail" className="mr-sm-2">Email</Label>
-                <Input type="email" name="email" id="exampleEmail" placeholder="fritz.fantom@uibk.at" />
+              <FormGroup check>
+                <Label check>
+                  <Input type="checkbox"/>{' '}
+                  Accept Terms and conditions
+                </Label>
               </FormGroup>
 
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="examplePassword" className="mr-sm-2">Password</Label>
-                <Input type="password" name="password" id="examplePassword" placeholder="password" />
-              </FormGroup>
-
-              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label for="examplePassword" className="mr-sm-2">Password confirmation</Label>
-                <Input type="password" name="password" id="examplePassword" placeholder="confirm password" />
-              </FormGroup>
-
-              <Button>Register</Button>
+              <Button block className="button-platra">Register</Button>
             </Form>
-
-
           </Col>
         </Row>
       </Container>

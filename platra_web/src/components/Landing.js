@@ -12,8 +12,8 @@ export class Landing extends React.Component {
       <div>
         <Container>
           <Row>
-            <Col md={{ size: 8, offset: 2 }}>
-              <Search/>
+            <Col md={{ size: 8, offset: 2 }} className="vh-80 d-flex align-items-center">
+              <Search className="Col-12"/>
             </Col>
           </Row>
         </Container>
