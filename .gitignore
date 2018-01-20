@@ -1,7 +1,7 @@
 # Created by https://www.gitignore.io/api/git,vim,node,ruby,rails,bower,rubymine
 
 ### Bower ###
-bower_components
+#bower_components
 .bower-cache
 .bower-registry
 .bower-tmp
@@ -105,7 +105,7 @@ config/initializers/secret_token.rb
 # if using bower-rails ignore default bower_components path bower.json files
 /vendor/assets/bower_components
 *.bowerrc
-bower.json
+#bower.json
 
 # Ignore pow environment settings
 .powenv
