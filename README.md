@@ -34,7 +34,7 @@ $ lessc platra.less platra.css
 ```
 http://localhost:3000 - Backend
 http://localhost:3001 - Frontend
-http://localhost:8181 - phpMyAdmin (Username: root Password:root)
+http://localhost:8181 - phpMyAdmin (Username: root Password: root)
 ```
 
 ## Fix "A server is already running."
