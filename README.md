@@ -1,6 +1,6 @@
 # Platra
 
-## Install 
+## Start Backend 
 
 ```
 $ cd platra_api
@@ -8,19 +8,13 @@ $ docker-compose up
 $ sh cms.sh
 ```
 
-## Run Platra
-
-```
-http://localhost:3000
-```
-
-## Run Tests
+## Start Backend Tests
 
 ```
 $ docker-compose run app rails test
 ```
 
-## Run React Frontend
+## Start Frontend
 
 ```
 $ cd platra_web
@@ -35,15 +29,15 @@ $ cd platra_web/src/less
 $ lessc platra.less platra.css
 ```
 
-## Run phpMyAdmin
+## Ports
 
 ```
-http://localhost:8181
-Username: root
-Password: root
+http://localhost:3000 - Backend
+http://localhost:3001 - Frontend
+http://localhost:8181 - phpMyAdmin (Username: root Password:root)
 ```
 
-## Error "A server is already running."
+## Fix "A server is already running."
 
 ```
 $ cd platra_api/tmp/pids && rm -rf server.pid 
