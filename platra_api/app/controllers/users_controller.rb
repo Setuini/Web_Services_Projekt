@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 		if !(User.exists?(email: params[:email]))
 			# Store JSON Data from Post request into User Object
 			user = User.new(:name => params[:name], :email => params[:email], :password => params[:password]);
-			validate user;
+			#validate user;
 			#response
 			if user.save
 				msg.push('User created successfully');

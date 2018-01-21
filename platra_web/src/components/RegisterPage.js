@@ -9,7 +9,8 @@ export class RegisterPage extends React.Component {
     this.state = {
       name: 'Test',
       email: 'test@test.at',
-      password: 'test'
+      password: 'test',
+      password_validate: 'test'
     };
 
     //if the function needs to access the state it has to be bound
