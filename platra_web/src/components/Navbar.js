@@ -26,6 +26,7 @@ export class NavbarPlatra extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
 
+              <Link to="/auth" className="nav-link">AuthTest</Link>
               <Link to="/login" className="nav-link">Login</Link>
               <Link to="/register" className="nav-link">Register</Link>
               

@@ -46,6 +46,10 @@ export class LoginPage extends React.Component {
     .then((resdata) => {
       this.setState({jwt : JSON.stringify(resdata.jwt)});
       localStorage.setItem("jwt", JSON.stringify(resdata.jwt));
+      //console.log("JWT: "+this.state.jwt);
+      //save jwt in the browsers local storage
+      localStorage.setItem('jwt', this.state.jwt);
+      console.log("JWT: "+localStorage.getItem('jwt'));
     })
     .catch( (ex) => {
       console.log("Fetch failed" + ex);
@@ -78,7 +82,6 @@ export class LoginPage extends React.Component {
               </Row>
               <Button block type="submit" className="button-platra">Login</Button>
             </Form>
-            <h2>JWT:{this.state.jwt}</h2>
           </Col>
         </Row>
       </Container>

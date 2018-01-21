@@ -44,5 +44,11 @@ Username: root
 Password: root
 ```
 
+## Error "A server is already running."
+
+```
+$ cd platra_api/tmp/pids && rm -rf server.pid 
+```
+
 
 

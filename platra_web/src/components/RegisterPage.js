@@ -54,7 +54,6 @@ export class RegisterPage extends React.Component {
     })
     .catch( (ex) => {
       console.log("Fetch failed" + ex);
-
     });
 
     event.preventDefault();
