@@ -3,10 +3,9 @@
 ## Install 
 
 ```
+$ cd platra_api
 $ docker-compose up
-$ docker-compose run app rake db:create
-$ docker-compose run app rake db:migrate
-$ docker-compose run app rake db:seed
+$ sh cms.sh
 ```
 
 ## Run Platra
