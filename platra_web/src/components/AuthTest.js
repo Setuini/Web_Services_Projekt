@@ -18,8 +18,8 @@ export class AuthTest extends React.Component {
     console.log("AuthTest");
 
 
-    fetch("http://127.0.0.1:3000/user_token",{
-        method: 'POST',
+    fetch("http://127.0.0.1:3000/auth",{
+        method: 'GET',
         headers: myHeaders,
         mode: 'cors',
         body: ''
