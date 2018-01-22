@@ -7,5 +7,6 @@ class CreateTimeTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_foreign_key :time_tables, :users
+    add_index :time_tables, [:user_id,:name], unique: true, :name => 'my_time_table_index'
   end
 end

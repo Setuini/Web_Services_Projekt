@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.string "location", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "fk_rails_4669d9d4d1"
+    t.index ["user_id", "name"], name: "my_time_table_index", unique: true
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

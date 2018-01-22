@@ -6,4 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 users = User.create(name: 'Max Muster', email: 'max.muster@uibk.at', password: '1234')
-
+timetable = TimeTable.create(user_id: users.id, name: 'Innsbruck2016', location: 'Innsbruck')
