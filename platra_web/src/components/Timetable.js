@@ -14,8 +14,6 @@ export class Timetable extends React.Component {
               <TimetableDay/>
               <TimetableDay/>
               <TimetableDay/>
-              <TimetableDay/>
-          
           </Row>
         </Container>
       </div>
