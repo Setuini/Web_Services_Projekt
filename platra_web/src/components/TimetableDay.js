@@ -17,9 +17,12 @@ export class TimetableDay extends React.Component {
     }
 
     return (
-      <div className="col-sm-3">
+      <div className="col-sm-4">
+        <h2 className="day-heading">Monday 29.12.2018</h2>
         <div className="card">
-          {timetableActivities}
+          <div className="activities">
+            {timetableActivities}
+          </div>
         </div>
       </div>
     );
