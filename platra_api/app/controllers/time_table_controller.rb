@@ -4,7 +4,7 @@ class TimeTableController < ApplicationController
   #all timetables for the specific user are shown
   def indexTimeTables
     @time_tables = TimeTable.find_by user_id: current_user.id
-    render :json => @time_tables, :include => {:time_table_entries => {:include => :point_of_interest}}, :except => [:id, :created_at, :updated_at];
+    render :json => @time_tables, :include => {:time_table_entries => {:include => {:point_of_interest => {:except => [:id]}}, :except => [:id,:time_table_id,:point_of_interest_id]}}, :except => [:id,:user_id, :created_at, :updated_at];
   end
 
   #here a new timetable is created
