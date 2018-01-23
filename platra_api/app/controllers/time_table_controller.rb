@@ -4,7 +4,7 @@ class TimeTableController < ApplicationController
   #all timetables for the specific user are shown
   def indexTimeTables
     @time_tables = TimeTable.find_by user_id: current_user.id
-    render :json => @time_tables, :include => {:time_table_entries => {:include => :point_of_interest}}, :except => [:id, :created_at, :updated_at];
+    render :json => @time_tables, :include => {:time_table_entries => {:include => {:point_of_interest => {:except => [:id]}}, :except => [:id,:time_table_id,:point_of_interest_id]}}, :except => [:id,:user_id, :created_at, :updated_at];
   end
 
   #here a new timetable is created
@@ -25,7 +25,7 @@ class TimeTableController < ApplicationController
   def savePoI
     msg = [];
     if !(PointOfInterest.exists?(name: params[:name], longitude: params[:longitude], latitude: params[:latitude]))
-      poi = PointOfInterest.new(:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params]);
+      poi = PointOfInterest.new(:location => params[:location],:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params]);
       poi.save
       msg.push('PointOfInterest created successfully');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
