@@ -13,13 +13,14 @@
 ActiveRecord::Schema.define(version: 20171111171059) do
 
   create_table "point_of_interests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "location", null: false
     t.string "name", null: false
     t.string "longitude", null: false
     t.string "latitude", null: false
     t.string "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name", "longitude", "latitude"], name: "my_uq_index", unique: true
+    t.index ["location", "name", "longitude", "latitude"], name: "my_uq_index", unique: true
   end
 
   create_table "time_table_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
