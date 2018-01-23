@@ -8,7 +8,7 @@ export class TimetableDay extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      jsonData: props.jsonData;
+      jsonData: props.jsonData
     }
   }
 

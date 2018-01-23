@@ -24,19 +24,22 @@ export class Timetable extends React.Component {
     console.log("Timetable.js - Fetch");
 
     this.setState({fetchInProgress: true});
-    fetch("https://jsonplaceholder.typicode.com/photos/1",{
+    fetch("http://localhost:3000/api/places",{
         method: 'GET',
         headers: myHeaders,
         mode: 'cors'
     })
     .then((res) => {
+      console.log("Res "+res[0]);
       return res.json(); 
     })
     .then((resdata) => {
+      console.log(resdata);
+      console.log("Name "+resdata[1]);
       this.setState({
-        heading: "Goldenes Dachl",//JSON.stringify(resdata.title),
+        jsonData: JSON.stringify(resdata),
         //desc: JSON.stringify(resdata.body),
-        img: resdata.url,
+        //img: resdata.url,
         fetchInProgress: false
       });
 
@@ -56,9 +59,9 @@ export class Timetable extends React.Component {
       <div>
         <Container>
           <Row>
-              <TimetableDay/>
-              <TimetableDay/>
-              <TimetableDay/>
+              <TimetableDay jsonData={this.state.jsonData}/>
+              <TimetableDay jsonData={this.state.jsonData}/>
+              <TimetableDay jsonData={this.state.jsonData}/>
           </Row>
         </Container>
       </div>
