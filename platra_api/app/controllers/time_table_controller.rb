@@ -25,7 +25,7 @@ class TimeTableController < ApplicationController
   def savePoI
     msg = [];
     if !(PointOfInterest.exists?(name: params[:name], longitude: params[:longitude], latitude: params[:latitude]))
-      poi = PointOfInterest.new(:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params]);
+      poi = PointOfInterest.new(:location => params[:location],:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params]);
       poi.save
       msg.push('PointOfInterest created successfully');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
