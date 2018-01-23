@@ -5,8 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# Use devise for user authentication
-gem 'devise'
+# Google Places wrapper
+gem 'google_places'
 
 # Set correct headers 
 #gem 'rack-cors'

@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     get '/list_users' => 'users#index'
     post '/register_user' => 'users#register'
     get '/auth' => 'test#testAuth'
+
+    get '/api/places' => 'api_events#show'
  
 end
