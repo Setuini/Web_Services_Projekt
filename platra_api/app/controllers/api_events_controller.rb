@@ -22,6 +22,7 @@
 
 class ApiEventsController < ApplicationController
     require 'open-uri'
+    require 'thread'
     #skip_before_action :verify_authenticity_token
     before_action :set_cors
 
@@ -85,6 +86,7 @@ class ApiEventsController < ApplicationController
            length = 3 
         end 
 
+        # only get one photo for now
         for i in 0..length
             photos[i] = spot.photos[i].fetch_url(800)
         end
@@ -120,20 +122,34 @@ class ApiEventsController < ApplicationController
         duration = to - from
 
         timetable = Hash.new
+        duplicate_activities = []
         for i in 0..duration
             day = Hash.new
-            activities = get_poi("Innsbruck", [@types[rand(@types.length)] ,@types[rand(@types.length)], @types[rand(@types.length)]])
-
+            activities = get_poi("Innsbruck", [@types[rand(@types.length)], @types[rand(@types.length)], @types[rand(@types.length)]])
             evening_activities = get_poi("Innsbruck", @evening_types)
-
-            #logger.debug types.length)
+            
+            # multithread
+            threads = []
+            threads << Thread.new { }
+            threads << Thread.new { }
+            threads.each {|t| t.join}
 
             day["breakfast"] = "" #create_poi_object(get_poi("Innsbruck", ["restaurant", "cafe"])[0])
             day["morning_activity"] = create_poi_object(activities[rand(activities.length)]) 
             day["lunch"] = ""
             day["afternoon_activity"] = create_poi_object(activities[rand(activities.length)]) 
             day["dinner"] = ""
-            day["evening_activity"] = create_poi_object(evening_activities[rand(activities.length)]) 
+            day["evening_activity"] = create_poi_object(evening_activities[rand(activities.length)])
+            
+            for item in day
+                logger.debug duplicate_activities.include?(item[1]["place_id"])
+                if !duplicate_activities.include?(item[1]["place_id"]) 
+                    duplicate_activities.push item[1]["place_id"]
+                else
+                    logger.debug "ACTIVITY ALREADY EXISTS"
+                end
+            end
+
             timetable[(from + i).to_s] = day
         end
 
