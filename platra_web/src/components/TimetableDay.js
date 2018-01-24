@@ -5,7 +5,12 @@ import { TimetableActivity } from './TimetableActivity.js';
 
 export class TimetableDay extends React.Component {
 
-
+  constructor(props){
+    super(props);
+    this.state = {
+      jsonData: props.jsonData
+    }
+  }
 
   render() {
     var activietesPerDay = 5;

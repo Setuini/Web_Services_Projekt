@@ -56,7 +56,7 @@ export class TimetableActivity extends React.Component {
     if (this.state.fetchInProgress){
       image = <div className="activity-loading"></div>;
     } else {
-      image = <img src={this.state.img} className="activity-img"/>;
+      image = <img src={this.state.img} className="activity-img" alt=""/>;
     }
     return (
       <div>

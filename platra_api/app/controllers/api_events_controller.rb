@@ -33,9 +33,8 @@ class ApiEventsController < ApplicationController
 
     def initialize
         #@places_api_key = 'AIzaSyDEiC_i0rhwIaKQDM2X2Pm3OJW3A30-SVY'
-        @places_api_key = 'AIzaSyAdcW1tyOj-ZYZTkfjtFRrvPnuTE-oR7os'
-        #@places_api_key = 'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg'
-
+        #@places_api_key = 'AIzaSyAdcW1tyOj-ZYZTkfjtFRrvPnuTE-oR7os'
+        @places_api_key = 'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0'
         @weather_api_key = 'e4b258a5707a4e9689e7f994287949a1'
 
         @types = ["spa", "casino", "amusement_park", "beauty_salon", "aquarium", "art_gallery", "bowling_alley", "book_store", "museum", "park", "shopping_mall", "zoo"]
