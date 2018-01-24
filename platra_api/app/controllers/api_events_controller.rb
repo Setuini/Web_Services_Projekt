@@ -32,9 +32,22 @@ class ApiEventsController < ApplicationController
     end
 
     def initialize
-        #@places_api_key = 'AIzaSyDEiC_i0rhwIaKQDM2X2Pm3OJW3A30-SVY'
-        #@places_api_key = 'AIzaSyAdcW1tyOj-ZYZTkfjtFRrvPnuTE-oR7os'
-        @places_api_key = 'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0'
+        places_keys = [
+            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
+            'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0',
+            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU'
+        ]
+        
+        # loop over Places API keys to try to prevent over quota error
+        for i in 0..places_keys.length
+            @places_api_key = places_keys[i]
+            response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=47.2667018,11.4008976&type=park&rankby=distance&key=#{@places_api_key}").read
+            if response["status"] != "OVER_QUERY_LIMIT"
+                logger.debug "API_KEY_NR: #{i}"
+                break
+            end
+        end
+
         @weather_api_key = 'e4b258a5707a4e9689e7f994287949a1'
 
         @types = ["spa", "casino", "amusement_park", "beauty_salon", "aquarium", "art_gallery", "bowling_alley", "book_store", "museum", "park", "shopping_mall", "zoo"]
@@ -77,17 +90,19 @@ class ApiEventsController < ApplicationController
         return @places.spot(place_id)
     end
 
-    def get_poi_photos(place_id)
-        spot = @places.spot(place_id)
+    def get_poi_photos(spot)
         photos = Array.new
-        length = spot.photos.length-1
-        if length > 3 
-           length = 3 
+        #length = spot.photos.length-1
+        length = 0
+        if length > 1 
+           length = 1 
         end 
 
         # only get one photo for now
         for i in 0..length
-            photos[i] = spot.photos[i].fetch_url(800)
+            if spot.photos[i]
+                photos[i] = spot.photos[i].fetch_url(800)
+            end
         end
 
         return photos
@@ -105,7 +120,7 @@ class ApiEventsController < ApplicationController
         poi_object["lng"] = poi["lng"]
         poi_object["name"] = poi["name"]
         poi_object["rating"] = poi["rating"]
-        poi_object["photos"] = get_poi_photos(poi["place_id"])
+        poi_object["photos"] = get_poi_photos(poi_details)
         poi_object["opening_hours"] = poi_details["opening_hours"] 
         poi_object["phone_number"] = poi_details["international_phone_number"]
         poi_object["outdoors"] = false 
@@ -129,16 +144,20 @@ class ApiEventsController < ApplicationController
             
             # multithread
             threads = []
-            threads << Thread.new { }
-            threads << Thread.new { }
-            threads.each {|t| t.join}
 
             day["breakfast"] = "" #create_poi_object(get_poi("Innsbruck", ["restaurant", "cafe"])[0])
-            day["morning_activity"] = create_poi_object(activities[rand(activities.length)]) 
+            threads << Thread.new { 
+                day["morning_activity"] = create_poi_object(activities[rand(activities.length)]) 
+            }
             day["lunch"] = ""
-            day["afternoon_activity"] = create_poi_object(activities[rand(activities.length)]) 
+            threads << Thread.new { 
+                day["afternoon_activity"] = create_poi_object(activities[rand(activities.length)]) 
+            }
             day["dinner"] = ""
-            day["evening_activity"] = create_poi_object(evening_activities[rand(activities.length)])
+            threads << Thread.new { 
+                day["evening_activity"] = create_poi_object(evening_activities[rand(activities.length)])
+            }
+            threads.each {|t| t.join}
             
             for item in day
                 logger.debug duplicate_activities.include?(item[1]["place_id"])
