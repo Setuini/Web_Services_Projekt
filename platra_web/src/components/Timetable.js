@@ -34,7 +34,10 @@ export class Timetable extends React.Component {
       return res.json(); 
     })
     .then((resdata) => {
-      console.log(resdata);
+      console.log(resdata["2018-01-23"]);
+      Object.keys(resdata).forEach(function(key) {
+        console.log(resdata[key]);
+      });
       console.log("Name "+resdata[1]);
       this.setState({
         jsonData: JSON.stringify(resdata),
