@@ -32,31 +32,31 @@ export class Timetable extends React.Component {
     //console.log("Timetable.js - Fetch");
 
     this.setState({fetchInProgress: true});
-    //fetch("http://localhost:3000/api/v1/places",{
-        //method: 'POST',
-        //headers: myHeaders,
-        //mode: 'cors'
-    //})
-    //.then((res) => {
-      //return res.json(); 
-    //})
-    //.then((resdata) => {
-      //Object.keys(resdata).forEach(function(key) {
-      //});
-      //this.setState({
-        //jsonData: JSON.stringify(resdata),
-        ////desc: JSON.stringify(resdata.body),
-        ////img: resdata.url,
-        //fetchInProgress: false
-      //});
-    //})
-    //.catch( (ex) => {
-      //console.log("Timetable - Fetch failed: " + ex);
-      //this.setState({
-        //errors : ex,
-        //fetchInProgress: false 
-      //});
-    //});
+    fetch("http://localhost:3000/api/v1/places",{
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors'
+    })
+    .then((res) => {
+      return res.json(); 
+    })
+    .then((resdata) => {
+      Object.keys(resdata).forEach(function(key) {
+      });
+      this.setState({
+        jsonData: JSON.stringify(resdata),
+        //desc: JSON.stringify(resdata.body),
+        //img: resdata.url,
+        fetchInProgress: false
+      });
+    })
+    .catch( (ex) => {
+      console.log("Timetable - Fetch failed: " + ex);
+      this.setState({
+        errors : ex,
+        fetchInProgress: false 
+      });
+    });
   }
 
   getDay(weekday){
