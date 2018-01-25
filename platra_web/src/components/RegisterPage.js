@@ -38,7 +38,7 @@ export class RegisterPage extends React.Component {
       password_confirmation: this.state.password_validate
     })
 
-    fetch("http://127.0.0.1:3000/register_user",{
+    fetch("http://127.0.0.1:3000/api/v1/register",{
         method: 'POST',
         headers: myHeaders,
         mode: 'cors',

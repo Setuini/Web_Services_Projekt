@@ -130,9 +130,6 @@ export class TimetablePage extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col>
-              <Button onClick={this.prevPage}>Prev</Button>
-            </Col>
             <Col className="col-sm-2">
               {this.buttonPrev}
             </Col>

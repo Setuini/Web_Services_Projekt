@@ -27,7 +27,7 @@ export class TimetableDay extends React.Component {
     var col = "col-sm-"+(12/len);
 
     return (
-      <div className="col-sm-4">
+      <div>
         <h2 className="day-heading">{this.state.day} {this.state.date}</h2>
         <div className="card">
           <div className="activities">
