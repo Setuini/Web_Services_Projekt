@@ -14,11 +14,11 @@ export class Timetable extends React.Component {
       jsonData: '',
       errors: '',
       fetchInProgress: false
-    };
+    };console
 
-    console.log(props.location.startDate);
-    console.log(props.location.endDate);
-    console.log(props.location.location);
+    console.log("Timetable - startDate:"+props.location.startDate);
+    console.log("Timetable - endDate:"+props.location.endDate);
+    console.log("Timetable - Location:"+props.location.location);
   }
 
 
@@ -37,25 +37,20 @@ export class Timetable extends React.Component {
         mode: 'cors'
     })
     .then((res) => {
-      console.log("Res "+res[0]);
       return res.json(); 
     })
     .then((resdata) => {
-      console.log(resdata["2018-01-23"]);
       Object.keys(resdata).forEach(function(key) {
-        console.log(resdata[key]);
       });
-      console.log("Name "+resdata[1]);
       this.setState({
         jsonData: JSON.stringify(resdata),
         //desc: JSON.stringify(resdata.body),
         //img: resdata.url,
         fetchInProgress: false
       });
-
     })
     .catch( (ex) => {
-      console.log("Fetch failed" + ex);
+      console.log("Timetable - Fetch failed" + ex);
       this.setState({
         errors : ex,
         fetchInProgress: false 

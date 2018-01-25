@@ -6,8 +6,6 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { SearchAutocomplete } from './SearchAutocomplete.js'
 
-
-
 export class Search extends React.Component {
 
   constructor (props) {
@@ -42,17 +40,15 @@ export class Search extends React.Component {
   }
 
   setLocation(event){
-    console.log("SET LOCATION:"+event);
+    console.log("Search - Set Location:"+event);
     this.setState({
       location: event
     });
   }
 
   render() {
-
     return (
       <div>
-
         <h1 className="Heading-Main">PlaTra</h1>
         <p className="Heading-Sub">Let us help to plan your holiday</p>
         <p className="Heading-Sub">We create a timetable with restaurants and points of interest for you, which you can than edit and store.</p>
