@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Alert, Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link , Redirect } from 'react-router-dom';
 
 export class LoginPage extends React.Component {
@@ -28,7 +28,6 @@ export class LoginPage extends React.Component {
   }
 
   handleSubmit(event) {
-
     var myHeaders = new Headers();
     myHeaders.append('Accept', 'application/json')
     myHeaders.append('Content-Type', 'application/json');
@@ -61,17 +60,20 @@ export class LoginPage extends React.Component {
     .catch( (ex) => {
       console.log("Fetch failed" + ex);
       this.setState({
-        errors : ex,
-        fireRedirect: true
+        errors : "Login failed"
       });
     });
-
 
     //prevent page from reloading
     event.preventDefault();
   }
 
   render() {
+
+    this.error = null;
+    if (this.state.errors !== '') {
+      this.error = <Alert color="danger" className="error">{this.state.errors}</Alert>;
+    }
 
     return (
       <Container>
@@ -84,6 +86,7 @@ export class LoginPage extends React.Component {
               <FormGroup>
                 <Input type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
               </FormGroup>
+
               <Row>
                 <FormGroup check className="col-6">
                   <Label className="checkbox" check>
@@ -93,6 +96,13 @@ export class LoginPage extends React.Component {
                 </FormGroup>
                 <Link to="/" className='col-6 text-right'>Forgot your password?</Link>
               </Row>
+
+              <Row>
+                <Col>
+                  {this.error}
+                </Col>
+              </Row>
+
               <Button block type="submit" className="button-platra">Login</Button>
               {this.state.fireRedirect && (<Redirect to={'/'}/>)}
             </Form>

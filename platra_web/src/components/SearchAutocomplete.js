@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export class SearchAutocomplete extends Component {
 
+
   render() {
     const inputProps = {
       value: this.props.location,
@@ -18,16 +19,14 @@ export class SearchAutocomplete extends Component {
         endDate: this.props.end
     }
 
-   // console.log("Timetable - timetable_to"+timetable_to.location+" "+timetable_to.startDate+" "+timetable_to.endDate);
-
     return (
-      <div onSubmit={this.handleSubmit}>
+      <div>
         <div className="row row-destination">
             <div className="col-1 my-auto mx-auto">
                 <i className="fa fa-search" aria-hidden="true"></i>
             </div>
             <div className="col-sm-11 col-lg-9 ">
-               <PlacesAutocomplete inputProps={inputProps} className="input-destination"/>
+               <PlacesAutocomplete inputProps={inputProps} className="input-destination" required/>
             </div>
             <div className="col-lg-2 my-auto mx-auto hidden-lg-down">
                 <Link to={timetable_to}><input className="btn btn-primary button-platra" type="submit" id="search-btn" value="Search"/></Link>

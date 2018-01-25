@@ -17,11 +17,6 @@ export class Timetable extends React.Component {
       errors: '',
       fetchInProgress: false
     };
-    this.nextPage = this.nextPage.bind(this);
-    this.prevPage = this.prevPage.bind(this);
-    this.hasNext = this.hasNext.bind(this);
-    this.hasPrev = this.hasPrev.bind(this);
-    this.getDay = this.getDay.bind(this);
   }
 
   // Fetch Data for given Time (startDate -> endDate)
@@ -60,32 +55,6 @@ export class Timetable extends React.Component {
     });
   }
 
-  nextPage(){
-    this.setState({
-      activePage: this.state.activePage+1
-    });
-  }
-
-  hasNext(){
-    if (this.state.activePage < this.state.pages) {
-      return true;
-    }
-    return false;
-  }
-
-  hasPrev(){
-    if (this.state.activePage > 0) {
-      return true;
-    }
-    return false;
-  }
-
-  prevPage(){
-    this.setState({
-      activePage: this.state.activePage-1
-    });
-  }
-
   getDay(weekday){
     if (weekday === 1) {
       return "Monday";
@@ -106,7 +75,6 @@ export class Timetable extends React.Component {
     }
   }
 
-  // create timetable according to days of the fetch
   render() {
     var timetableDays = [];
     var date = moment(this.state.startDate);
@@ -116,7 +84,6 @@ export class Timetable extends React.Component {
         var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
         timetableDays.push(<TimetableDay day={day} date={date} col={len} key={i}/>);
     }
-
     return (
         <Container>
           <Row>

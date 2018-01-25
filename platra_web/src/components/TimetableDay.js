@@ -18,8 +18,6 @@ export class TimetableDay extends React.Component {
     var activietesPerDay = 5;
     var timetableActivities = [];
     for (var i = 0; i < activietesPerDay; i++) {
-        // note: we add a key prop here to allow react to uniquely identify each
-        // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
         timetableActivities.push(<TimetableActivity key={i}/>);
     }
 
