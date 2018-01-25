@@ -187,7 +187,7 @@ class ApiEventsController < ApplicationController
             for item in day
                 poi = item[1]
                 if poi && !(PointOfInterest.exists?(place_id: poi["place_id"]))
-                    poi_db = PointOfInterest.new(:name => poi["name"], :longitude => poi["lng"], :latitude => poi["lat"], :place_id => poi["place_id"], :params => poi.to_json);
+                    poi_db = PointOfInterest.new(:location => "Innsbruck", :name => poi["name"], :longitude => poi["lng"], :latitude => poi["lat"], :place_id => poi["place_id"], :params => poi.to_json);
                   poi_db.save
                 end
 

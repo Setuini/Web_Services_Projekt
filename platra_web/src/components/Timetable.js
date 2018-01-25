@@ -31,7 +31,7 @@ export class Timetable extends React.Component {
     //console.log("Timetable.js - Fetch");
 
     this.setState({fetchInProgress: true});
-    fetch("http://localhost:3000/api/places",{
+    fetch("http://localhost:3000/api/v1/places",{
         method: 'POST',
         headers: myHeaders,
         mode: 'cors'
