@@ -16,7 +16,8 @@ export class Timetable extends React.Component {
       jsonData: '',
       data: '',
       errors: '',
-      fetchInProgress: false
+      fetchInProgress: false,
+      timetable_name: ''
     };
 
     /*
@@ -134,9 +135,9 @@ export class Timetable extends React.Component {
   }
 
   setTimetableName(name){
-    console.log("Search - Set Name:"+name);
+    console.log("Search - Set Name:"+name.target.value);
     this.setState({
-      timetable_name: name
+      timetable_name: name.target.value
     });
   }
 
@@ -172,22 +173,19 @@ export class Timetable extends React.Component {
     }
     return (
         <Container>
-<Row>
-        <Col>
-                <InputGroup>
-                <Input ref="input" type="text" placeholder="Name" onChange={this.setTimetableName}  /> 
-                  <InputGroupAddon className='input-group-append'><Button className="button-platra" onClick={this.saveTimetable}>Save Timetable</Button></InputGroupAddon>
-                </InputGroup>
-        </Col>
-        </Row>
-        <Row>
-<OwlCarousel 
-	className="owl-theme"
-	margin={10} nav
->
-        {timetableDays}
-        </OwlCarousel>
-        </Row>
+          <Row>
+            <Col>
+              <InputGroup>
+              <Input ref="input" type="text" placeholder="Name" onChange={this.setTimetableName}/> 
+                <InputGroupAddon className='input-group-append'><Button className="button-platra" onClick={this.saveTimetable}>Save Timetable</Button></InputGroupAddon>
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <OwlCarousel className="owl-theme" margin={10} nav>
+              {timetableDays}
+            </OwlCarousel>
+          </Row>
         </Container>
     );
   }
