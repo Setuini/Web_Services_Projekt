@@ -13,6 +13,7 @@ export class Timetable extends React.Component {
       endDate: props.location.endDate,
       location: props.location.location,
       jsonData: '',
+      data: '',
       errors: '',
       fetchInProgress: false
     };
@@ -20,8 +21,10 @@ export class Timetable extends React.Component {
     console.log(this.state);
     console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
     console.log("Timetable - endDate: "+moment(this.state.endDate).format("DD/MM/YYYY") );
-    console.log("Timetable - Location: "+this.state.location);
     */
+    //this.getDay = this.getDay.bind(this);
+    this.saveTimetable = this.saveTimetable.bind(this);
+    console.log("Timetable - Location: "+this.state.location);
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
   }
@@ -48,6 +51,7 @@ export class Timetable extends React.Component {
       });
       this.setState({
         jsonData: JSON.stringify(resdata),
+        data: resdata,
         //desc: JSON.stringify(resdata.body),
         //img: resdata.url,
         fetchInProgress: false
@@ -63,9 +67,42 @@ export class Timetable extends React.Component {
   }
 
   // save timetable
-  saveTimeTable() {
+  saveTimetable() {
     console.log("Save timetable");
-    console.log(this.state);
+    var data = this.state.data;
+
+    var myHeaders = new Headers();
+    myHeaders.append('Accept', 'application/json')
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('jwt')));
+
+    this.setState({fetchInProgress: true});
+    fetch("http://localhost:3000/api/v1/places/save",{
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        body: JSON.stringify({
+            timetable: data,
+            name: "Test" + Math.round(Math.random()*1000),
+            location: this.state.location
+        })
+    })
+    .then((res) => {
+      return res.json(); 
+    })
+    .then((resdata) => {
+      this.setState({
+        jsonData: JSON.stringify(resdata),
+        fetchInProgress: false
+      });
+    })
+    .catch( (ex) => {
+      console.log("Timetable - Fetch failed: " + ex);
+      this.setState({
+        errors : ex,
+        fetchInProgress: false 
+      });
+    });
   }
 
   nextPage(){
@@ -105,7 +142,7 @@ export class Timetable extends React.Component {
 
     return (
       <div>
-        <Link onClick={this.saveTimeTable} to="#">Save Timetable</Link>
+        <Link onClick={this.saveTimetable} to="#">Save Timetable</Link>
         {pages[this.state.activePage]}
       </div>
     );

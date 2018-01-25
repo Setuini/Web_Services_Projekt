@@ -5,7 +5,7 @@ class CreatePointOfInterests < ActiveRecord::Migration[5.1]
       t.string :name, null:false
       t.string :longitude, null:false
       t.string :latitude, null:false
-      t.string :params
+      t.text :params
       t.string :place_id
       t.string :types
       t.timestamps
