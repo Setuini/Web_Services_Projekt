@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
-
+import { Link , Redirect } from 'react-router-dom';
 
 export class LoginPage extends React.Component {
 
@@ -11,11 +11,13 @@ export class LoginPage extends React.Component {
       email: '',
       password: '',
       pwvisible: '',
+      fireRedirect: false,
       errors: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onLogin = this.props.onLogin;
   }
 
   handleChange(event) {
@@ -26,6 +28,7 @@ export class LoginPage extends React.Component {
   }
 
   handleSubmit(event) {
+
     var myHeaders = new Headers();
     myHeaders.append('Accept', 'application/json')
     myHeaders.append('Content-Type', 'application/json');
@@ -44,22 +47,32 @@ export class LoginPage extends React.Component {
       return res.json(); 
     })
     .then((resdata) => {
-      this.setState({jwt : JSON.stringify(resdata.jwt)});
+      this.setState({
+        jwt : JSON.stringify(resdata.jwt),
+        fireRedirect: true
+      });
       localStorage.setItem("jwt", JSON.stringify(resdata.jwt));
       //console.log("JWT: "+this.state.jwt);
       //save jwt in the browsers local storage
       localStorage.setItem('jwt', this.state.jwt);
+      this.onLogin(event);
       console.log("JWT: "+localStorage.getItem('jwt'));
     })
     .catch( (ex) => {
       console.log("Fetch failed" + ex);
-      this.setState( {errors : ex } );
+      this.setState({
+        errors : ex,
+        fireRedirect: true
+      });
     });
+
+
     //prevent page from reloading
     event.preventDefault();
   }
 
   render() {
+
     return (
       <Container>
         <Row>
@@ -78,9 +91,10 @@ export class LoginPage extends React.Component {
                     Stay logged in
                   </Label>
                 </FormGroup>
-                <a href="/" className='col-6 text-right'>Forgot your password?</a>
+                <Link to="/" className='col-6 text-right'>Forgot your password?</Link>
               </Row>
               <Button block type="submit" className="button-platra">Login</Button>
+              {this.state.fireRedirect && (<Redirect to={'/'}/>)}
             </Form>
           </Col>
         </Row>
