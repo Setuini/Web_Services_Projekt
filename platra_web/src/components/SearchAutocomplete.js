@@ -18,7 +18,7 @@ export class SearchAutocomplete extends Component {
         endDate: this.props.end
     }
 
-    console.log("Timetable - timetable_to"+timetable_to.location+" "+timetable_to.startDate+" "+timetable_to.endDate);
+   // console.log("Timetable - timetable_to"+timetable_to.location+" "+timetable_to.startDate+" "+timetable_to.endDate);
 
     return (
       <div onSubmit={this.handleSubmit}>

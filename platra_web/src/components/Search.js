@@ -12,7 +12,7 @@ export class Search extends React.Component {
     super(props)
     this.state = {
       startDate: moment(),
-      endDate: moment().add(1, "days"),
+      endDate: moment().add(1, "d"),
       includeDays: [],
       location: ''
     };
@@ -22,16 +22,11 @@ export class Search extends React.Component {
   }
 
   setStart(date) {
-    var days = [];
-    for (var i=1; i < 120; i++) {
-      days[i] = moment(this.state.endDate).add(i,"days");
-    }
     console.log("Search - Set Start Date:"+moment(date).format("DD/MM/YYYY"));
     this.setState({
-      startDate: date,
-      includeDays: days
+      startDate: date
     });
-    this.setEnd(moment(date).add(1, "days"));
+    this.setEnd(moment(date).add(1, "d"));
   }
 
   setEnd(date){
