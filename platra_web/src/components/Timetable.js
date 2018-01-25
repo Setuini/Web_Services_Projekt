@@ -1,7 +1,5 @@
 import React  from 'react';
-//import { Link } from 'react-router-dom'
 import moment from 'moment';
-import { TimetablePage } from './TimetablePage.js';
 import { TimetableDay } from './TimetableDay.js';
 import { InputGroup, InputGroupAddon, Input, Container, Row, Col, Button } from 'reactstrap';
 import OwlCarousel from 'react-owl-carousel';
@@ -138,6 +136,26 @@ export class Timetable extends React.Component {
     });
   }
 
+  getDay(weekday){
+    if (weekday === 1) {
+      return "Monday";
+    }else if(weekday === 2){
+      return "Tuesday";
+    }else if(weekday === 3){
+      return "Wednesday";
+    }else if(weekday === 4){
+      return "Thursday";
+    }else if(weekday === 5){
+      return "Friday";
+    }else if(weekday === 6){
+      return "Saturday";
+    }else if(weekday === 0){
+      return "Sunday";
+    }else{
+      return undefined;
+    }
+  }
+
   // create timetable according to days of the fetch
   render() {
     var timetableDays = [];
@@ -149,6 +167,7 @@ export class Timetable extends React.Component {
         var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
         timetableDays.push(<TimetableDay day={day} date={date} col={len} key={i}/>);
     }
+
     return (
         <Container>
 <Row>

@@ -4,6 +4,8 @@ class CreateTimeTables < ActiveRecord::Migration[5.1]
       t.bigint :user_id, null:false
       t.string :name, null:false
       t.string :location, null:false
+      t.date :start, null:false
+      t.date :finish, null:false
       t.timestamps
     end
     add_foreign_key :time_tables, :users

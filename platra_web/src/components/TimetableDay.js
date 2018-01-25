@@ -23,8 +23,8 @@ export class TimetableDay extends React.Component {
         timetableActivities.push(<TimetableActivity key={i}/>);
     }
 
-    var len = parseInt(this.state.len, 10);
-    var col = "col-sm-"+(12/len);
+    //var len = parseInt(this.state.len, 10);
+    //var col = "col-sm-"+(12/len);
 
     return (
       <div>
