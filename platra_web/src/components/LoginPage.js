@@ -34,7 +34,7 @@ export class LoginPage extends React.Component {
     console.log("Login");
     console.log(data);
 
-    fetch("http://127.0.0.1:3000/user_token",{
+    fetch("http://127.0.0.1:3000/api/v1/login",{
         method: 'POST',
         headers: myHeaders,
         mode: 'cors',

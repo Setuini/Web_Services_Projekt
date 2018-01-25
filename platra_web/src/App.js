@@ -9,6 +9,7 @@ class App extends Component {
 
   constructor(props){
     super(props);
+
     this.navbar = null; 
     if(localStorage.getItem('jwt')) {
         this.navbar = <NavbarPlatraLoggedIn />

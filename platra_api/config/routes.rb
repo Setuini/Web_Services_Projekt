@@ -2,11 +2,15 @@ Rails.application.routes.draw do
     resources :users
     mount Knock::Engine => "/knock"
 
-    post '/user_token' => 'user_token#create'
-    get '/list_users' => 'users#index'
-    post '/register_user' => 'users#register'
     get '/auth' => 'test#testAuth'
-    get '/index_timetable' => 'time_table#indexTimeTables'
-    post '/api/places' => 'api_events#show'
+
+    post '/api/v1/login' => 'user_token#create'
+    post '/api/v1/register' => 'users#register'
+    get '/api/v1/users' => 'users#index'
+
+    post '/api/v1/places' => 'api_events#show'
+    post '/api/v1/places/save' => 'api_events#show'
+    get '/api/v1/places' => 'time_table#indexTimeTables'
+    get '/api/v1/places/:id' => 'time_table#indexTimeTables'
 
 end
