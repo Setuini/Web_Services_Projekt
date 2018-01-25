@@ -11,7 +11,7 @@ class TimeTableController < ApplicationController
   def saveTimeTable
     msg = [];
     if !(TimeTable.exists?(name: params[:name], user_id: current_user.id))
-      timetable = TimeTabele.new(:user_id => current_user.id, :name => params[:name], :location => params[:location]);
+      timetable = TimeTable.new(:user_id => current_user.id, :name => params[:name], :location => params[:location]);
       timetable.save
       msg.push('TimeTable created successfully');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
