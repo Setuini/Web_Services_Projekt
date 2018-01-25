@@ -6,8 +6,10 @@ class CreatePointOfInterests < ActiveRecord::Migration[5.1]
       t.string :longitude, null:false
       t.string :latitude, null:false
       t.string :params
+      t.string :place_id
+      t.string :types
       t.timestamps
     end
-    add_index :point_of_interests, [:location,:name,:longitude,:latitude], unique: true, :name => 'my_uq_index'
+    add_index :point_of_interests, [:place_id], unique: true, :name => 'my_uq_index'
   end
 end

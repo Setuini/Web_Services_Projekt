@@ -18,9 +18,11 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.string "longitude", null: false
     t.string "latitude", null: false
     t.string "params"
+    t.string "place_id"
+    t.string "types"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["location", "name", "longitude", "latitude"], name: "my_uq_index", unique: true
+    t.index ["place_id"], name: "my_uq_index", unique: true
   end
 
   create_table "time_table_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
