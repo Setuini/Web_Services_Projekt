@@ -7,7 +7,9 @@ export class TimetableDay extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      jsonData: props.jsonData
+      jsonData: this.props.jsonData,
+      date: this.props.date,
+      day: this.props.day
     }
   }
 
@@ -22,7 +24,7 @@ export class TimetableDay extends React.Component {
 
     return (
       <div className="col-sm-4">
-        <h2 className="day-heading">Monday 29.12.2018</h2>
+        <h2 className="day-heading">{this.state.day} {this.state.date}</h2>
         <div className="card">
           <div className="activities">
             {timetableActivities}

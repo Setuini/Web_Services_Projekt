@@ -4,7 +4,7 @@ import { TimetableDay } from './TimetableDay.js';
 import moment from 'moment';
 
 export class Timetable extends React.Component {
-    constructor(props){
+  constructor(props){
     super(props);
     this.state = {
       startDate: props.location.startDate,
@@ -14,9 +14,12 @@ export class Timetable extends React.Component {
       errors: '',
       fetchInProgress: false
     };
-    console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
+
+    console.log(this.state);
+    /*console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
     console.log("Timetable - endDate: "+moment(this.state.endDate).format("DD/MM/YYYY") );
-    console.log("Timetable - Location: "+this.state.location);
+    console.log("Timetable - Location: "+this.state.location);*/
+    this.getDay = this.getDay.bind(this);
   }
 
   // Fetch Data for given Time (startDate -> endDate)
@@ -24,7 +27,8 @@ export class Timetable extends React.Component {
     var myHeaders = new Headers();
     myHeaders.append('Accept', 'application/json')
     myHeaders.append('Content-Type', 'application/json');
-    console.log("Timetable.js - Fetch");
+    
+    //console.log("Timetable.js - Fetch");
 
     this.setState({fetchInProgress: true});
     fetch("http://localhost:3000/api/places",{
@@ -46,7 +50,7 @@ export class Timetable extends React.Component {
       });
     })
     .catch( (ex) => {
-      console.log("Timetable - Fetch failed" + ex);
+      console.log("Timetable - Fetch failed: " + ex);
       this.setState({
         errors : ex,
         fetchInProgress: false 
@@ -54,26 +58,49 @@ export class Timetable extends React.Component {
     });
   }
 
+  getDay(weekday){
+    if (weekday === 1) {
+      return "Monday";
+    }else if(weekday === 2){
+      return "Tuesday";
+    }else if(weekday === 3){
+      return "Wedenesday";
+    }else if(weekday === 4){
+      return "Thursday";
+    }else if(weekday === 5){
+      return "Friday";
+    }else if(weekday === 6){
+      return "Saterday";
+    }else if(weekday === 0){
+      return "Sunday";
+    }else{
+      return undefined;
+    }
+  }
+
   // create timetable according to days of the fetch
   render() {
 
-/*
-    var a = moment(this.state.startDate.format("DD/MM/YYYY"));
-    var b = moment(this.state.startDate.format("DD/MM/YYYY"));
-    var len = a.diff(b, 'days');
-    console.log(len);*/
+    var len = 0;
+    if(this.state.startDate !== undefined && this.state.endDate !== undefined){
+      var a = this.state.startDate;
+      var b = this.state.endDate;
+      len = b.diff(a, 'days');
+    }
+    console.log("Timetable - Length: "+len);
 
-
-    
-    
+    var timetableDays = [];
+    for (var i = 0; i < len; i++) {
+        var date = moment(this.state.startDate).add(i,'days').format("DD/MM/YYYY");
+        var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
+        timetableDays.push(<TimetableDay day={day} date={date} key={i}/>);
+    }
 
     return (
       <div>
         <Container>
           <Row>
-              <TimetableDay jsonData={this.state.jsonData}/>
-              <TimetableDay jsonData={this.state.jsonData}/>
-              <TimetableDay jsonData={this.state.jsonData}/>
+              {timetableDays}
           </Row>
         </Container>
       </div>
