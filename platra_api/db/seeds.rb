@@ -9,4 +9,4 @@ users = User.create(name: 'Max Muster', email: 'max.muster@uibk.at', password: '
 timetable = TimeTable.create(user_id: users.id, name: 'Innsbruck2016', location: 'Innsbruck')
 pointointerest = PointOfInterest.create(location: "Innsbruck",name: "Uni Innsbruck",longitude: 1, latitude:1,types:"Uni",place_id:"Abc")
 pointointerest2 = PointOfInterest.create(location: "Innsbruck",name: "Technik",longitude: 2, latitude:2,types:"Uni",place_id:"Abcd")
-timetableentry = TimeTableEntry.create(time_table_id: timetable.id,point_of_interest_id: pointointerest.id,begin: DateTime.new(2017,11,24,0,0,0), end: DateTime.new(2017,11,24,0,0,0))
+timetableentry = TimeTableEntry.create(time_table_id: timetable.id,point_of_interest_id: pointointerest.id,begin: DateTime.new(2017,11,24,0,0,0), end: DateTime.new(2017,11,24,0,0,0), types: "I dont know")

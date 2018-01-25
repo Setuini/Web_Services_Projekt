@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.bigint "point_of_interest_id", null: false
     t.datetime "begin", null: false
     t.datetime "end", null: false
+    t.string "types"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["point_of_interest_id", "begin", "end"], name: "my_index", unique: true
