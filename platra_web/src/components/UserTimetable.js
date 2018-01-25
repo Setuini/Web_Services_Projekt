@@ -1,6 +1,4 @@
 import React  from 'react';
-import { Link } from 'react-router-dom'
-import moment from 'moment';
 import { UserTimetablePage } from './UserTimetablePage.js';
 
 export class UserTimetable extends React.Component {

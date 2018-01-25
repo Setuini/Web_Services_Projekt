@@ -37,11 +37,12 @@ class ApiEventsController < ApplicationController
 
     def initialize
         places_keys = [
+            'AIzaSyDloBMbRkCkmil3r6eitffzB9do1UtMDt4',
+            'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
+            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
+            'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0',
             'AIzaSyAkBjJvD-WB0wp3M3rCn7ylT2AETfPHAZg',
             'AIzaSyA0009rGVaq3T3uQ3f17TfrJX_IrtTjtvQ',
-            'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0',
-            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
-            'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
         ]
 
         # loop over Places API keys to try to prevent over quota error

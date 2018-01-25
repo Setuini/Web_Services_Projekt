@@ -17,7 +17,6 @@ export class UserTimetableDay extends React.Component {
     render() {
         var timetableActivities = [];
         for (var i in this.state.dayData) {
-            console.log(this.state.dayData[i]);
             timetableActivities.push(<UserTimetableActivity key={i} data={this.state.dayData[i]}/>);
         }
 
