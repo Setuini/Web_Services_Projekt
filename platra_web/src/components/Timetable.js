@@ -8,16 +8,23 @@ export class Timetable extends React.Component {
     constructor(props){
     super(props);
     this.state = {
-      startDate: '',
-      endDate: '',
+      startDate: props.match.params.startDate,
+      endDate: props.match.params.endDate,
+      location: props.match.params.location,
       jsonData: '',
       errors: '',
       fetchInProgress: false
     };
+
+    console.log(props.location.startDate);
+    console.log(props.location.endDate);
+    console.log(props.location.location);
   }
+
 
   // Fetch Data for given Time (startDate -> endDate)
   componentDidMount(){
+
     var myHeaders = new Headers();
     myHeaders.append('Accept', 'application/json')
     myHeaders.append('Content-Type', 'application/json');
@@ -25,7 +32,7 @@ export class Timetable extends React.Component {
 
     this.setState({fetchInProgress: true});
     fetch("http://localhost:3000/api/places",{
-        method: 'GET',
+        method: 'POST',
         headers: myHeaders,
         mode: 'cors'
     })

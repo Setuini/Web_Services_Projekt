@@ -9,6 +9,7 @@ export class SearchAutocomplete extends Component {
       address: ''
     }
     this.onChange = (address) => this.setState({ address })
+
   }
 
   handleFormSubmit = (event) => {
@@ -24,7 +25,14 @@ export class SearchAutocomplete extends Component {
     const inputProps = {
       value: this.state.address,
       onChange: this.onChange,
-      placeholder: "Enter for Example Innsbrck"
+      placeholder: "Enter for Example Innsbruck"
+    }
+
+    const timetable_to = {
+        pathname: "/timetable",
+        location: "Innsbruck",
+        startDate: "test",
+        endDate: "test"
     }
 
     return (
@@ -40,7 +48,7 @@ export class SearchAutocomplete extends Component {
                <PlacesAutocomplete inputProps={inputProps} className="input-destination"/>
             </div>
             <div className="col-lg-2 my-auto mx-auto hidden-lg-down">
-                <Link to="/timetable"><input className="btn btn-primary button-platra" type="submit" id="search-btn" value="Search"/></Link>
+                <Link to={timetable_to}><input className="btn btn-primary button-platra" type="submit" id="search-btn" value="Search"/></Link>
             </div>
         </div>
       </div>

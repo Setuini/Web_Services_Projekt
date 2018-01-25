@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     post '/register_user' => 'users#register'
     get '/auth' => 'test#testAuth'
 
-    get '/api/places' => 'api_events#show'
+    post '/api/places' => 'api_events#show'
  
 end
