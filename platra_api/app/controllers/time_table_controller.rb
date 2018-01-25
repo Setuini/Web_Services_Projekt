@@ -34,7 +34,6 @@ class TimeTableController < ApplicationController
 
             params["timetable"].each do |date, activities|
                 activities.each do |activity, value|
-                    logger.debug(activity)
                     time_begin = Date.parse(date) + get_activity_time(activity)[0].seconds_since_midnight.seconds
                     time_end = Date.parse(date) + get_activity_time(activity)[1].seconds_since_midnight.seconds
                     saveTimeTableEntry(timetable.id, value["place_id"], time_begin, time_end, activity)

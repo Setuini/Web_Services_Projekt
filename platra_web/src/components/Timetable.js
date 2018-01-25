@@ -1,5 +1,5 @@
 import React  from 'react';
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import moment from 'moment';
 import { TimetablePage } from './TimetablePage.js';
 
@@ -144,7 +144,6 @@ export class Timetable extends React.Component {
 
     return (
       <div>
-        <Link onClick={this.saveTimetable} to="#">Save Timetable</Link>
         {pages[this.state.activePage]}
       </div>
     );
