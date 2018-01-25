@@ -1,7 +1,6 @@
 import React  from 'react';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Button } from 'reactstrap';
 import { TimetableDay } from './TimetableDay.js';
-import { Link } from 'react-router-dom'
 import moment from 'moment';
 
 export class TimetablePage extends React.Component {
@@ -9,7 +8,7 @@ export class TimetablePage extends React.Component {
     super(props);
     console.log(this.state);
     this.state = {
-      pageNumber: this.props.activePage,
+      pageNumber: this.props.pageNumber,
       startDate: this.props.start,
       endDate: this.props.end,
       location: this.props.location,
@@ -17,6 +16,9 @@ export class TimetablePage extends React.Component {
       errors: '',
       fetchInProgress: false
     };
+    console.log(this.state);
+    this.prevPage = this.props.prevPage;
+    this.nextPage = this.props.nextPage;
     this.getDay = this.getDay.bind(this);
   }
 
@@ -51,7 +53,9 @@ export class TimetablePage extends React.Component {
       <div>
         <Container>
           <Row>
-              TimetabelPage {this.state.pageNumber}
+              <Button onClick={this.prevPage}>Prev</Button>
+              <Button onClick={this.nextPage}>Next</Button>
+              TimetablePage {this.state.pageNumber} Start {this.startDate} End {this.endDate}
               {timetableDays}
           </Row>
         </Container>

@@ -1,6 +1,4 @@
 import React  from 'react';
-import { Container, Row } from 'reactstrap';
-import { TimetableDay } from './TimetablePage.js';
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import { TimetablePage } from './TimetablePage.js';
@@ -9,7 +7,8 @@ export class Timetable extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      activePage: 1,
+      activePage: 0,
+      pages: 1,
       startDate: props.location.startDate,
       endDate: props.location.endDate,
       location: props.location.location,
@@ -17,11 +16,14 @@ export class Timetable extends React.Component {
       errors: '',
       fetchInProgress: false
     };
-
+    /*
     console.log(this.state);
-    /*console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
+    console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
     console.log("Timetable - endDate: "+moment(this.state.endDate).format("DD/MM/YYYY") );
-    console.log("Timetable - Location: "+this.state.location);*/
+    console.log("Timetable - Location: "+this.state.location);
+    */
+    this.nextPage = this.nextPage.bind(this);
+    this.prevPage = this.prevPage.bind(this);
   }
 
   // Fetch Data for given Time (startDate -> endDate)
@@ -66,30 +68,47 @@ export class Timetable extends React.Component {
     console.log(this.state);
   }
 
+  nextPage(){
+    this.setState({
+      activePage: this.state.activePage+1
+    });
+  }
+
+  prevPage(){
+    this.setState({
+      activePage: this.state.activePage-1
+    });
+  }
+
   // create timetable according to days of the fetch
   render() {
 
     var len = 0;
+    var numPages = 1;
     if(this.state.startDate !== undefined && this.state.endDate !== undefined){
       var a = this.state.startDate;
       var b = this.state.endDate;
       len = b.diff(a, 'days');
     }
 
-    /*console.log("Timetable - Length: "+len);
-    console.log(this.state);
+    numPages = len/3;
+    var pages=[];
+    var start = this.state.startDate;
+    var end = moment(start, 'DD/MM/YYYY').add(3, 'd');
 
-    var timetableDays = [];
-    for (var i = 0; i < len; i++) {
-        var date = moment(this.state.startDate).add(i,'days').format("DD/MM/YYYY");
-        var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
-        timetableDays.push(<TimetableDay day={day} date={date} key={i}/>);
-    }*/
+
+    for (var i=0; i < numPages; i++){
+      console.log("Page "+i);
+      console.log(moment(start).format("DD/MM/YYYY") + " | " + moment(end).format("DD/MM/YYYY"));
+      pages.push(<TimetablePage key={i} pageNumber={i} prevPage={this.prevPage} nextPage={this.nextPage} start={start} end={end} location={this.state.location}/>);
+      start = end;
+      end = moment(end, 'DD/MM/YYYY').add(3, 'd');
+    }
 
     return (
       <div>
         <Link onClick={this.saveTimeTable} to="#">Save Timetable</Link>
-        <TimetablePage pagenumber={this.state.activePage} start={this.startDate} end={this.endDate} location={this.state.location}/>
+        {pages[this.state.activePage]}
       </div>
     );
   }

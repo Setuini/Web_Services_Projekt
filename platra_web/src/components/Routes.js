@@ -5,7 +5,6 @@ import { Timetable } from './Timetable.js';
 import { LoginPage } from './LoginPage.js';
 import { RegisterPage } from './RegisterPage.js';
 import { AuthTest } from './AuthTest.js';
-import { TimetablePage } from './TimetablePage.js';
 import {NavbarPlatra} from './Navbar.js';
 import {NavbarPlatraLoggedIn} from './NavbarLoggedIn.js';
 
