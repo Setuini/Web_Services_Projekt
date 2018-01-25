@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-
 import { Landing } from './Landing.js';
 import { Timetable } from './Timetable.js';
 import { LoginPage } from './LoginPage.js';
 import { RegisterPage } from './RegisterPage.js';
 import { AuthTest } from './AuthTest.js';
-
+import { TimetablePage } from './TimetablePage.js';
 import {NavbarPlatra} from './Navbar.js';
 import {NavbarPlatraLoggedIn} from './NavbarLoggedIn.js';
 
-
 export class Routes extends Component {
-
   constructor(props){
     super(props);
     this.state = {
@@ -24,7 +21,6 @@ export class Routes extends Component {
   }
 
   onLogout(event){
-    console.log("onLogout");
     this.setState({
       navbar: <NavbarPlatra/>,
       loggedIn: false
@@ -42,11 +38,11 @@ export class Routes extends Component {
     return (
   		<div>
         {this.state.navbar}
-
   			<Route exact path="/" component={Landing}/>
   			<Route path="/timetable" component={Timetable}/>
   			<Route path="/register" component={RegisterPage}/>
         <Route  path="/auth" component={AuthTest}/>
+
         <Route path="/login" render={(props) => (
           <LoginPage {...props} onLogin={this.onLogin}/>
         )}/>

@@ -1,13 +1,15 @@
 import React  from 'react';
 import { Container, Row } from 'reactstrap';
-import { TimetableDay } from './TimetableDay.js';
+import { TimetableDay } from './TimetablePage.js';
 import { Link } from 'react-router-dom'
 import moment from 'moment';
+import { TimetablePage } from './TimetablePage.js';
 
 export class Timetable extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      activePage: 1,
       startDate: props.location.startDate,
       endDate: props.location.endDate,
       location: props.location.location,
@@ -20,7 +22,6 @@ export class Timetable extends React.Component {
     /*console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
     console.log("Timetable - endDate: "+moment(this.state.endDate).format("DD/MM/YYYY") );
     console.log("Timetable - Location: "+this.state.location);*/
-    this.getDay = this.getDay.bind(this);
   }
 
   // Fetch Data for given Time (startDate -> endDate)
@@ -59,26 +60,6 @@ export class Timetable extends React.Component {
     });
   }
 
-  getDay(weekday){
-    if (weekday === 1) {
-      return "Monday";
-    }else if(weekday === 2){
-      return "Tuesday";
-    }else if(weekday === 3){
-      return "Wednesday";
-    }else if(weekday === 4){
-      return "Thursday";
-    }else if(weekday === 5){
-      return "Friday";
-    }else if(weekday === 6){
-      return "Saturday";
-    }else if(weekday === 0){
-      return "Sunday";
-    }else{
-      return undefined;
-    }
-  }
-
   // save timetable
   saveTimeTable() {
     console.log("Save timetable");
@@ -94,8 +75,8 @@ export class Timetable extends React.Component {
       var b = this.state.endDate;
       len = b.diff(a, 'days');
     }
-    console.log("Timetable - Length: "+len);
 
+    /*console.log("Timetable - Length: "+len);
     console.log(this.state);
 
     var timetableDays = [];
@@ -103,16 +84,12 @@ export class Timetable extends React.Component {
         var date = moment(this.state.startDate).add(i,'days').format("DD/MM/YYYY");
         var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
         timetableDays.push(<TimetableDay day={day} date={date} key={i}/>);
-    }
+    }*/
 
     return (
       <div>
         <Link onClick={this.saveTimeTable} to="#">Save Timetable</Link>
-        <Container>
-          <Row>
-              {timetableDays}
-          </Row>
-        </Container>
+        <TimetablePage pagenumber={this.state.activePage} start={this.startDate} end={this.endDate} location={this.state.location}/>
       </div>
     );
   }
