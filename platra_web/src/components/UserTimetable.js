@@ -9,9 +9,6 @@ export class UserTimetable extends React.Component {
         this.state = {
             activePage: 0,
             pages: 1,
-            startDate: props.location.startDate,
-            endDate: props.location.endDate,
-            location: props.location.location,
             jsonDataSaved: JSON,
             data: '',
             errors: '',
@@ -19,8 +16,6 @@ export class UserTimetable extends React.Component {
         };
 
         //this.getDay = this.getDay.bind(this);
-        this.saveTimetable = this.saveTimetable.bind(this);
-        console.log("Timetable - Location: "+this.state.location);
         this.nextPage = this.nextPage.bind(this);
         this.prevPage = this.prevPage.bind(this);
     }
