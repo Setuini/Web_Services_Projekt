@@ -37,9 +37,10 @@ class ApiEventsController < ApplicationController
 
     def initialize
         places_keys = [
-            'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
+            'AIzaSyA0009rGVaq3T3uQ3f17TfrJX_IrtTjtvQ',
             'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0',
-            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU'
+            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
+            'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
         ]
 
         # loop over Places API keys to try to prevent over quota error
@@ -87,7 +88,10 @@ class ApiEventsController < ApplicationController
 
         #response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{lat},#{lng}&type=park&rankby=distance&key=#{@places_api_key}").read
 
+        poi_cache_list = PointOfInterest.select("params").where("location = ? and types != ?", "Innsbruck", "null")
+
         return @places.spots(lat, lng, :types => types, :excludes => excludes)
+        #return JSON.parse poi_cache_list.to_json
     end
 
     def get_poi_details(place_id)
