@@ -11,7 +11,7 @@ import {
   DropdownItem,
   NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom'
-import { DropdownLogin } from './DropdownLogin.js';
+//import { DropdownLogin } from './DropdownLogin.js';
 
 export class NavbarPlatraLoggedIn extends React.Component {
   constructor(props) {
@@ -32,14 +32,15 @@ export class NavbarPlatraLoggedIn extends React.Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand><Link to="/">Platra</Link></NavbarBrand>
+          <NavbarBrand><Link className="nav-link" to="/">Platra</Link></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
 
-              <NavLink><li><Link to="/timetable">Timetables</Link></li></NavLink>
-              <NavLink><li><Link to="/">Profile</Link></li></NavLink>
-              
+              <Link className="nav-link" to="/timetable">Timetables</Link>
+              <Link className="nav-link" to="/">Profile</Link>
+              <Link className="nav-link" to="/">Logout</Link>
+             
             </Nav>
           </Collapse>
         </Navbar>
