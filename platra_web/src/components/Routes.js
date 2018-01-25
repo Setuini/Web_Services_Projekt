@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Landing } from './Landing.js';
 import { Timetable } from './Timetable.js';
+import { UserTimetable } from './UserTimetable.js';
 import { LoginPage } from './LoginPage.js';
 import { RegisterPage } from './RegisterPage.js';
 import { AuthTest } from './AuthTest.js';
@@ -39,6 +40,7 @@ export class Routes extends Component {
             {this.state.navbar}
             <Route exact path="/" component={Landing}/>
             <Route path="/timetable" component={Timetable}/>
+                <Route path="/usertimetable" component={UserTimetable}/>
             <Route path="/register" component={RegisterPage}/>
             <Route  path="/auth" component={AuthTest}/>
 
