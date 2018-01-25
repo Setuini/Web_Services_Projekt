@@ -64,13 +64,13 @@ export class Timetable extends React.Component {
     }else if(weekday === 2){
       return "Tuesday";
     }else if(weekday === 3){
-      return "Wedenesday";
+      return "Wednesday";
     }else if(weekday === 4){
       return "Thursday";
     }else if(weekday === 5){
       return "Friday";
     }else if(weekday === 6){
-      return "Saterday";
+      return "Saturday";
     }else if(weekday === 0){
       return "Sunday";
     }else{
