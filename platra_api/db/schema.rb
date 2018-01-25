@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.string "name", null: false
     t.string "longitude", null: false
     t.string "latitude", null: false
-    t.string "params"
+    t.text "params"
     t.string "place_id"
     t.string "types"
     t.datetime "created_at", null: false
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.string "types"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["point_of_interest_id", "begin", "end"], name: "my_index", unique: true
-    t.index ["time_table_id"], name: "fk_rails_950a206353"
+    t.index ["point_of_interest_id"], name: "fk_rails_be1caa74d8"
+    t.index ["time_table_id", "begin", "end"], name: "my_index", unique: true
   end
 
   create_table "time_tables", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
