@@ -39,7 +39,6 @@ export class UserTimetablePage extends React.Component {
     }
 
     render() {
-        console.log(this.state.jsonData.time_table_entries);
         var map = new Map();
         for (var i in this.state.jsonData.time_table_entries) {
             var datetime = new Date(this.state.jsonData.time_table_entries[i].begin);
@@ -53,20 +52,14 @@ export class UserTimetablePage extends React.Component {
             }
         }
         var timetableDays = [];
-        var i = 0;
-        for(var key in map){
+        var self = this;
+        map.forEach(function(value,key,m){
             var date = new Date(key);
             var date = moment(date).format("DD/MM/YYYY");
-            var day = this.getDay(moment(date).day());
-            timetableDays.push(<UserTimetableDay day={day} date={date} key={i} dayData={map.get(key)}/>);
-            i++;
-        }
-        /*var timetableDays = [];
-        for (var i = 0; i < 3; i++) {
-            var date = moment(this.state.startDate).add(i,'days').format("DD/MM/YYYY");
-            var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
-            timetableDays.push(<TimetableDay day={day} date={date} key={i} jsonData={this.state.jsonData}/>);
-        }*/
+            var day = self.getDay(moment(date).day());
+            timetableDays.push(<UserTimetableDay day={day} date={date} key={key} dayData={value}/>);
+        })
+
         return (
             <div>
                 <Container>
