@@ -37,7 +37,7 @@ class ApiEventsController < ApplicationController
 
     def initialize
         places_keys = [
-            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
+            'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
             'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0',
             'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU'
         ]
@@ -45,6 +45,7 @@ class ApiEventsController < ApplicationController
         # loop over Places API keys to try to prevent over quota error
         for i in 0..places_keys.length-1
             @places_api_key = places_keys[i]
+            response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=47.2667018,11.4008976&type=park&rankby=distance&key=#{@places_api_key}").read
             response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=47.2667018,11.4008976&type=park&rankby=distance&key=#{@places_api_key}").read
             if response["status"] != "OVER_QUERY_LIMIT"
                 logger.debug "API_KEY_NR: #{i}"
@@ -121,16 +122,16 @@ class ApiEventsController < ApplicationController
             return nil
         end
 
-        poi_details = get_poi_details(poi["place_id"])
+        #poi_details = get_poi_details(poi["place_id"])
         poi_object = Hash.new
         poi_object["place_id"] = poi["place_id"]
         poi_object["lat"] = poi["lat"]
         poi_object["lng"] = poi["lng"]
         poi_object["name"] = poi["name"]
         poi_object["rating"] = poi["rating"]
-        poi_object["photos"] = get_poi_photos(poi_details)
-        poi_object["opening_hours"] = poi_details["opening_hours"] 
-        poi_object["phone_number"] = poi_details["international_phone_number"]
+        #poi_object["photos"] = get_poi_photos(poi_details)
+        #poi_object["opening_hours"] = poi_details["opening_hours"] 
+        #poi_object["phone_number"] = poi_details["international_phone_number"]
         poi_object["outdoors"] = false 
 
         return poi_object
@@ -173,12 +174,12 @@ class ApiEventsController < ApplicationController
             }
 
             threads << Thread.new { 
-                day["dinner"] = create_poi_object(get_poi("Innsbruck", ["restaurant"])[0])
+                day["dinner"] = create_poi_object(restaurants[2])
             }
 
 
             threads << Thread.new { 
-                day["evening_activity"] = create_poi_object(restaurants[2])
+                day["evening_activity"] = create_poi_object(evening_activities[rand(evening_activities.length)])
             }
 
             threads.each {|t| t.join}
