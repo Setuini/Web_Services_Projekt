@@ -21,7 +21,7 @@ export class TimetableActivity extends React.Component {
     myHeaders.append('Accept', 'application/json')
     myHeaders.append('Content-Type', 'application/json');
 
-    console.log("TimetableActivity - Fetch");
+    //console.log("TimetableActivity - Fetch");
 
     this.setState({fetchInProgress: true});
 		fetch("https://jsonplaceholder.typicode.com/photos/1",{
