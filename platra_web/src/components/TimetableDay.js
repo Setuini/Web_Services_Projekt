@@ -9,7 +9,8 @@ export class TimetableDay extends React.Component {
     this.state = {
       jsonData: this.props.jsonData,
       date: this.props.date,
-      day: this.props.day
+      day: this.props.day,
+      len: this.props.col
     }
   }
 
@@ -21,6 +22,9 @@ export class TimetableDay extends React.Component {
         // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
         timetableActivities.push(<TimetableActivity key={i}/>);
     }
+
+    var len = parseInt(this.state.len, 10);
+    var col = "col-sm-"+(12/len);
 
     return (
       <div className="col-sm-4">
