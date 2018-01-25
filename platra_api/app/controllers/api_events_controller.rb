@@ -27,8 +27,8 @@ class ApiEventsController < ApplicationController
     before_action :set_cors
 
     def set_cors
-      headers['Access-Control-Allow-Origin'] = '*'
-      headers['Access-Control-Request-Method'] = '*'
+        headers['Access-Control-Allow-Origin'] = '*'
+        headers['Access-Control-Request-Method'] = '*'
     end
 
     def initialize
@@ -37,7 +37,7 @@ class ApiEventsController < ApplicationController
             'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0',
             'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU'
         ]
-        
+
         # loop over Places API keys to try to prevent over quota error
         for i in 0..places_keys.length
             @places_api_key = places_keys[i]
@@ -95,7 +95,7 @@ class ApiEventsController < ApplicationController
         #length = spot.photos.length-1
         length = 0
         if length > 1 
-           length = 1 
+            length = 1 
         end 
 
         # only get one photo for now
@@ -113,6 +113,10 @@ class ApiEventsController < ApplicationController
     end
 
     def create_poi_object(poi)
+        if poi == nil
+            return nil
+        end
+
         poi_details = get_poi_details(poi["place_id"])
         poi_object = Hash.new
         poi_object["place_id"] = poi["place_id"]
@@ -130,7 +134,7 @@ class ApiEventsController < ApplicationController
 
     def show
         logger.debug params
-    
+
         from = Date.new(2018, 1, 23)
         to = Date.new(2018, 1, 25)
         duration = to - from
@@ -138,35 +142,51 @@ class ApiEventsController < ApplicationController
         timetable = Hash.new
         duplicate_activities = []
         for i in 0..duration
+
             day = Hash.new
+            exclude_activites = []
             activities = get_poi("Innsbruck", [@types[rand(@types.length)], @types[rand(@types.length)], @types[rand(@types.length)]])
             evening_activities = get_poi("Innsbruck", @evening_types)
-            
+            restaurants = get_poi("Innsbruck", ["restaurant"])
+
             # multithread
             threads = []
+            threads << Thread.new { 
+                day["breakfast"] = create_poi_object(restaurants[0])
+            }
 
-            day["breakfast"] = "" #create_poi_object(get_poi("Innsbruck", ["restaurant", "cafe"])[0])
             threads << Thread.new { 
                 day["morning_activity"] = create_poi_object(activities[rand(activities.length)]) 
             }
-            day["lunch"] = ""
+
+            threads << Thread.new { 
+                day["lunch"] = create_poi_object(restaurants[1])
+            }
+
+
             threads << Thread.new { 
                 day["afternoon_activity"] = create_poi_object(activities[rand(activities.length)]) 
             }
-            day["dinner"] = ""
+
             threads << Thread.new { 
-                day["evening_activity"] = create_poi_object(evening_activities[rand(activities.length)])
+                day["dinner"] = create_poi_object(get_poi("Innsbruck", ["restaurant"])[0])
             }
+
+
+            threads << Thread.new { 
+                day["evening_activity"] = create_poi_object(restaurants[2])
+            }
+
             threads.each {|t| t.join}
-            
-            for item in day
-                logger.debug duplicate_activities.include?(item[1]["place_id"])
-                if !duplicate_activities.include?(item[1]["place_id"]) 
-                    duplicate_activities.push item[1]["place_id"]
-                else
-                    logger.debug "ACTIVITY ALREADY EXISTS"
-                end
-            end
+
+            #for item in day
+                #logger.debug duplicate_activities.include?(item[1]["place_id"])
+                #if !duplicate_activities.include?(item[1]["place_id"]) 
+                    #duplicate_activities.push item[1]["place_id"]
+                #else
+                    #logger.debug "ACTIVITY ALREADY EXISTS"
+                #end
+            #end
 
             timetable[(from + i).to_s] = day
         end

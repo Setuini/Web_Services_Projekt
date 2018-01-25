@@ -10,6 +10,14 @@ export class SearchAutocomplete extends Component {
       onChange: this.props.onChange,
       placeholder: "Enter for Example Innsbrck"
     }
+
+    const timetable_to = {
+        pathname: "/timetable",
+        location: "Innsbruck",
+        startDate: "test",
+        endDate: "test"
+    }
+
     return (
       <div onSubmit={this.handleSubmit}>
         <div className="row row-destination">
@@ -20,7 +28,7 @@ export class SearchAutocomplete extends Component {
                <PlacesAutocomplete inputProps={inputProps} className="input-destination"/>
             </div>
             <div className="col-lg-2 my-auto mx-auto hidden-lg-down">
-                <Link to="/timetable"><input type="submit" id="search-btn" className="btn btn-primary button-platra" value="Search"/></Link>
+                <Link to={timetable_to}><input className="btn btn-primary button-platra" type="submit" id="search-btn" value="Search"/></Link>
             </div>
         </div>
       </div>
