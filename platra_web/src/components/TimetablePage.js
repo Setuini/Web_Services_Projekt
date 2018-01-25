@@ -1,5 +1,5 @@
 import React  from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input, Container, Row, Col, Button } from 'reactstrap';
 import { TimetableDay } from './TimetableDay.js';
 import moment from 'moment';
 
@@ -13,14 +13,18 @@ export class TimetablePage extends React.Component {
       endDate: this.props.end,
       location: this.props.location,
       jsonData: '',
+      data: this.props.data,
       errors: '',
-      fetchInProgress: false
+      fetchInProgress: false,
+      timetable_name: ''
     };
 
     console.log(this.state);
     this.prevPage = this.props.prevPage;
     this.nextPage = this.props.nextPage;
     this.getDay = this.getDay.bind(this);
+    this.saveTimetable = this.saveTimetable.bind(this);
+    this.setName = this.setName.bind(this);
   }
 
   getDay(weekday){
@@ -43,6 +47,53 @@ export class TimetablePage extends React.Component {
     }
   }
 
+  // save timetable
+  saveTimetable() {
+    console.log("Save timetable");
+    //var data = this.props.data;
+      var data="";
+      //console.log(this.state.timetable_name);
+
+    var myHeaders = new Headers();
+    myHeaders.append('Accept', 'application/json')
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('jwt')));
+
+    this.setState({fetchInProgress: true});
+    fetch("http://localhost:3000/api/v1/places/save",{
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        body: JSON.stringify({
+            timetable: data,
+            name: this.state.timetable_name,
+            location: this.state.location
+        })
+    })
+    .then((res) => {
+      return res.json(); 
+    })
+    .then((resdata) => {
+      this.setState({
+        jsonData: JSON.stringify(resdata),
+        fetchInProgress: false
+      });
+    })
+    .catch( (ex) => {
+      console.log("Timetable - Fetch failed: " + ex);
+      this.setState({
+        errors : ex,
+        fetchInProgress: false 
+      });
+    });
+  }
+
+  setName(name){
+    this.setState({
+      timetable_name: name
+    });
+  }
+
   render() {
     var timetableDays = [];
     var date = moment(this.state.startDate);
@@ -56,6 +107,14 @@ export class TimetablePage extends React.Component {
     return (
       <div>
         <Container>
+          <Row>
+             <Col>
+                <InputGroup>
+                <Input placeholder="Name" onChange={this.setName}  /> 
+                  <InputGroupAddon className='input-group-append'><Button className="button-platra" onClick={this.saveTimetable}>Save Timetable</Button></InputGroupAddon>
+                </InputGroup>
+            </Col>
+          </Row>
           <Row>
             <Col>
               <Button onClick={this.prevPage}>Prev</Button>

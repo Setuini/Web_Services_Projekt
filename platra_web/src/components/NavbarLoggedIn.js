@@ -12,12 +12,6 @@ export class NavbarPlatraLoggedIn extends React.Component {
       fireRedirect: false
     };
     this.onLogout = this.props.onLogout;
-
-    this.save_button = "";
-    console.log(this.props);
-    //if(this.props.location === "/timetable") {
-        //this.save_button = <Link className="btn btn-primary button-platra" onClick={this.saveTimetable} to="#">Save Timetable</Link>;
-    //}
   }
 
   toggle() {
@@ -34,7 +28,6 @@ export class NavbarPlatraLoggedIn extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {this.save_button}
               <Link className="nav-link" to="/timetable">Timetables</Link>
               <Link className="nav-link" to="/">Profile</Link>
               <Link className="nav-link" to="/" onClick={this.onLogout}>Logout</Link>
