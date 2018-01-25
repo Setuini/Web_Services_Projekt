@@ -7,14 +7,13 @@ export class Timetable extends React.Component {
     constructor(props){
     super(props);
     this.state = {
-      startDate: props.match.params.startDate,
-      endDate: props.match.params.endDate,
-      location: props.match.params.location,
+      startDate: props.location.startDate,
+      endDate: props.location.endDate,
+      location: props.location.location,
       jsonData: '',
       errors: '',
       fetchInProgress: false
     };
-
     console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
     console.log("Timetable - endDate: "+moment(this.state.endDate).format("DD/MM/YYYY") );
     console.log("Timetable - Location: "+this.state.location);

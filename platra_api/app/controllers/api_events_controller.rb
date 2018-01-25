@@ -31,6 +31,10 @@ class ApiEventsController < ApplicationController
         headers['Access-Control-Request-Method'] = '*'
     end
 
+    def set_places_api_key()
+
+    end
+
     def initialize
         places_keys = [
             'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
@@ -39,7 +43,7 @@ class ApiEventsController < ApplicationController
         ]
 
         # loop over Places API keys to try to prevent over quota error
-        for i in 0..places_keys.length
+        for i in 0..places_keys.length-1
             @places_api_key = places_keys[i]
             response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=47.2667018,11.4008976&type=park&rankby=distance&key=#{@places_api_key}").read
             if response["status"] != "OVER_QUERY_LIMIT"
