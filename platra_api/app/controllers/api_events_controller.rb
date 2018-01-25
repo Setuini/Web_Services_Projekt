@@ -46,7 +46,6 @@ class ApiEventsController < ApplicationController
         for i in 0..places_keys.length-1
             @places_api_key = places_keys[i]
             response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=47.2667018,11.4008976&type=park&rankby=distance&key=#{@places_api_key}").read
-            response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=47.2667018,11.4008976&type=park&rankby=distance&key=#{@places_api_key}").read
             if response["status"] != "OVER_QUERY_LIMIT"
                 logger.debug "API_KEY_NR: #{i}"
                 break
@@ -132,6 +131,7 @@ class ApiEventsController < ApplicationController
         #poi_object["photos"] = get_poi_photos(poi_details)
         #poi_object["opening_hours"] = poi_details["opening_hours"] 
         #poi_object["phone_number"] = poi_details["international_phone_number"]
+        poi_object["types"] = poi["types"]
         poi_object["outdoors"] = false 
 
         return poi_object
@@ -184,14 +184,20 @@ class ApiEventsController < ApplicationController
 
             threads.each {|t| t.join}
 
-            #for item in day
+            for item in day
+                poi = item[1]
+                if poi && !(PointOfInterest.exists?(place_id: poi["place_id"]))
+                    poi_db = PointOfInterest.new(:location => "Innsbruck", :name => poi["name"], :longitude => poi["lng"], :latitude => poi["lat"], :place_id => poi["place_id"], :types => poi["types"], :params => poi.to_json);
+                  poi_db.save
+                end
+
                 #logger.debug duplicate_activities.include?(item[1]["place_id"])
                 #if !duplicate_activities.include?(item[1]["place_id"]) 
                     #duplicate_activities.push item[1]["place_id"]
                 #else
                     #logger.debug "ACTIVITY ALREADY EXISTS"
                 #end
-            #end
+            end
 
             timetable[(from + i).to_s] = day
         end

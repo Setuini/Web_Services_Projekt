@@ -1,6 +1,7 @@
 import React  from 'react';
 import { Container, Row } from 'reactstrap';
 import { TimetableDay } from './TimetableDay.js';
+import { Link } from 'react-router-dom'
 import moment from 'moment';
 
 export class Timetable extends React.Component {
@@ -31,7 +32,7 @@ export class Timetable extends React.Component {
     //console.log("Timetable.js - Fetch");
 
     this.setState({fetchInProgress: true});
-    fetch("http://localhost:3000/api/places",{
+    fetch("http://localhost:3000/api/v1/places",{
         method: 'POST',
         headers: myHeaders,
         mode: 'cors'
@@ -78,6 +79,12 @@ export class Timetable extends React.Component {
     }
   }
 
+  // save timetable
+  saveTimeTable() {
+    console.log("Save timetable");
+    console.log(this.state);
+  }
+
   // create timetable according to days of the fetch
   render() {
 
@@ -89,6 +96,8 @@ export class Timetable extends React.Component {
     }
     console.log("Timetable - Length: "+len);
 
+    console.log(this.state);
+
     var timetableDays = [];
     for (var i = 0; i < len; i++) {
         var date = moment(this.state.startDate).add(i,'days').format("DD/MM/YYYY");
@@ -98,6 +107,7 @@ export class Timetable extends React.Component {
 
     return (
       <div>
+        <Link onClick={this.saveTimeTable} to="#">Save Timetable</Link>
         <Container>
           <Row>
               {timetableDays}

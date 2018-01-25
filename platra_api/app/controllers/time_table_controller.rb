@@ -11,9 +11,22 @@ class TimeTableController < ApplicationController
   def saveTimeTable
     msg = [];
     if !(TimeTable.exists?(name: params[:name], user_id: current_user.id))
-      timetable = TimeTabele.new(:user_id => current_user.id, :name => params[:name], :location => params[:location]);
+      timetable = TimeTable.new(:user_id => current_user.id, :name => params[:name], :location => params[:location]);
       timetable.save
       msg.push('TimeTable created successfully');
+      render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
+    else
+      msg.push('TimeTable not created');
+      render json: { msg: msg.map(&:inspect).join(', ') }, status: 422
+    end
+  end
+
+  def deleteTimeTable
+    msg[];
+    if (TimeTable.exists?(name: params[:name], user_id: current_user.id))
+      timetable = TimeTable.find_by user_id: current_user.id, name: params[:name]
+      timetable.delete;
+      msg.push('TimeTable deleted successfully');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
     else
       msg.push('TimeTable not created');
@@ -24,13 +37,13 @@ class TimeTableController < ApplicationController
   #here pointofinterest is saved
   def savePoI
     msg = [];
-    if !(PointOfInterest.exists?(name: params[:name], longitude: params[:longitude], latitude: params[:latitude]))
-      poi = PointOfInterest.new(:location => params[:location],:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params]);
+    if !(PointOfInterest.exists?(place_id: params[:place_id]))
+      poi = PointOfInterest.new(:location => params[:location],:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params], :types =>[:types], place_id => params[:place_id]);
       poi.save
       msg.push('PointOfInterest created successfully');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
     else
-      msg.push('PointOfInterest not created');
+      msg.push('PointOfInterest already created');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 422
     end
   end
@@ -51,18 +64,24 @@ class TimeTableController < ApplicationController
     end
   end
 
-  def timeTableEntry
+  def saveTimeTableEntry
     msg = [];
-    if !(PointOfInterest.exists?(name: params[:nameP], longitude: params[:longitude], latitude: params[:latitude])) || !(TimeTable.exists?(name: params[:nameT], user_id: current_user.id))
-      table = TimeTable.find_by name: params[:nameT], user_id: current_user.id;
-      poi = PointOfInterest.find_by name: params[:name], longitude: params[:longitude], latitude: params[:latitude]
-      td = TimeTableEntry.new(:point_of_interest_id => poi.id,time_table_id => table.id,:begin => params[:begin], :end => params[:end]);
-      td.save
-      msg.push('PointOfInterest created successfully');
-      render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
+    if (PointOfInterest.exists?(place_id: params[:place_id])) && (TimeTable.exists?(name: params[:name], user_id: current_user.id))
+      table = TimeTable.find_by place_id: params[:name], user_id: current_user.id;
+      poi = PointOfInterest.find_by place_id: params[:place_id]
+      if !TimeTableEntry.exists?(time_table_id: table.id, begin: params[:begin], end: params[:end])
+        td = TimeTableEntry.new(:point_of_interest_id => poi.id,time_table_id => table.id,:begin => params[:begin], :end => params[:end], :types => params[:types]);
+        td.save
+        msg.push('TimeTableEntry created successfully');
+        render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
+      else
+        msg.push('TimeTableEntry already there');
+        render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
+      end
     else
-      msg.push('TimeTableEntry not created');
+      msg.push('TimeTable or PointOfInterest not created');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 422
     end
   end
+
 end
