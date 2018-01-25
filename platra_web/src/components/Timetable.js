@@ -119,27 +119,25 @@ export class Timetable extends React.Component {
 
   // create timetable according to days of the fetch
   render() {
-
     var len = 0;
     var numPages = 1;
     if(this.state.startDate !== undefined && this.state.endDate !== undefined){
       var a = this.state.startDate;
       var b = this.state.endDate;
-      len = b.diff(a, 'days');
+      len = b.diff(a, 'd');
     }
 
     numPages = len/3;
     var pages=[];
     var start = this.state.startDate;
     var end = moment(start, 'DD/MM/YYYY').add(3, 'd');
-
-
     for (var i=0; i < numPages; i++){
-      console.log("Page "+i);
-      console.log(moment(start).format("DD/MM/YYYY") + " | " + moment(end).format("DD/MM/YYYY"));
       pages.push(<TimetablePage key={i} pageNumber={i} prevPage={this.prevPage} nextPage={this.nextPage} start={start} end={end} location={this.state.location}/>);
       start = end;
-      end = moment(end, 'DD/MM/YYYY').add(3, 'd');
+      end = moment(start, 'DD/MM/YYYY').add(3, 'd');
+      if (moment(end).isAfter(this.state.endDate)) {
+        end = moment(this.state.endDate).add(1,'d');
+      }
     }
 
     return (

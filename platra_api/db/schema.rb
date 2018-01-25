@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.string "name", null: false
     t.string "longitude", null: false
     t.string "latitude", null: false
-    t.string "params"
+    t.text "params"
     t.string "place_id"
     t.string "types"
     t.datetime "created_at", null: false
