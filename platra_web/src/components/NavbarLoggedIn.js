@@ -1,7 +1,6 @@
 import React from 'react';
 import { Collapse,Navbar, NavbarToggler, Nav } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom'
-//import { DropdownLogin } from './DropdownLogin.js';
+import { Link } from 'react-router-dom'
 
 export class NavbarPlatraLoggedIn extends React.Component {
   constructor(props) {
@@ -12,7 +11,6 @@ export class NavbarPlatraLoggedIn extends React.Component {
       isOpen: false,
       fireRedirect: false
     };
-
     this.onLogout = this.props.onLogout;
   }
 
@@ -22,8 +20,6 @@ export class NavbarPlatraLoggedIn extends React.Component {
     });
   }
 
-
-
   render() {
     return (
       <div>
@@ -32,12 +28,9 @@ export class NavbarPlatraLoggedIn extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-
               <Link className="nav-link" to="/timetable">Timetables</Link>
               <Link className="nav-link" to="/">Profile</Link>
-
-              <a className="nav-link" onClick={this.onLogout}>Logout</a>
-             
+              <Link className="nav-link" to="/" onClick={this.onLogout}>Logout</Link>
             </Nav>
           </Collapse>
         </Navbar>
