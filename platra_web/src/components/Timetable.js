@@ -24,6 +24,8 @@ export class Timetable extends React.Component {
     */
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
+    this.hasNext = this.hasNext.bind(this);
+    this.hasPrev = this.hasPrev.bind(this);
   }
 
   // Fetch Data for given Time (startDate -> endDate)
@@ -74,6 +76,20 @@ export class Timetable extends React.Component {
     });
   }
 
+  hasNext(){
+    if (this.state.activePage < this.state.pages) {
+      return true;
+    }
+    return false;
+  }
+
+  hasPrev(){
+    if (this.state.activePage > 0) {
+      return true;
+    }
+    return false;
+  }
+
   prevPage(){
     this.setState({
       activePage: this.state.activePage-1
@@ -96,7 +112,7 @@ export class Timetable extends React.Component {
     var end = moment(start, 'DD/MM/YYYY').add(3, 'd');
     for (var i=0; i < numPages; i++){
       console.log("Create Page");
-      pages.push(<TimetablePage key={i} pageNumber={i} prevPage={this.prevPage} nextPage={this.nextPage} start={start} end={end} location={this.state.location}/>);
+      pages.push(<TimetablePage key={i} pageNumber={i} prevPage={this.prevPage} nextPage={this.nextPage} hasNext={this.hasNext} hasPrev={this.hasPrev} start={start} end={end} location={this.state.location}/>);
       start = end;
       end = moment(start, 'DD/MM/YYYY').add(3, 'd');
 

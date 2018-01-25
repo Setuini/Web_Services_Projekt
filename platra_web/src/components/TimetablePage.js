@@ -20,6 +20,8 @@ export class TimetablePage extends React.Component {
     console.log(this.state);
     this.prevPage = this.props.prevPage;
     this.nextPage = this.props.nextPage;
+    this.hasNext = this.props.hasNext;
+    this.hasPrev = this.props.hasPrev;
     this.getDay = this.getDay.bind(this);
   }
 
@@ -54,26 +56,34 @@ export class TimetablePage extends React.Component {
         timetableDays.push(<TimetableDay day={day} date={date} col={len} key={i}/>);
     }
 
+    this.buttonNext = null;
+    this.buttonPrev = null;
+
+    if(this.hasNext()){
+      this.buttonNext = <Button className="button-next" onClick={this.nextPage}>Next</Button>
+    }
+
+    if(this.hasPrev()){
+      this.buttonPrev = <Button className="button-prev" onClick={this.prevPage}>Prev</Button>
+    }
+
     return (
       <div>
         <Container>
           <Row>
-            TimetablePage {this.state.pageNumber} Len={len} Start {moment(this.state.startDate).format('DD/MM/YYYY')} End {moment(this.state.endDate).format('DD/MM/YYYY')}
+            <Col className="col-sm-2">
+              {this.buttonPrev}
+            </Col>
+            <Col className="col-sm-8">
+              TimetablePage {this.state.pageNumber} Len={len} Start {moment(this.state.startDate).format('DD/MM/YYYY')} End {moment(this.state.endDate).format('DD/MM/YYYY')}
+            </Col>
+            <Col className="col-sm-2">
+              {this.buttonNext}
+            </Col>
           </Row>
-
           <Row>
               {timetableDays}
           </Row>
-
-          <Row>
-            <Col>
-              <Button className="button-prev" onClick={this.prevPage}>Prev</Button>
-            </Col>
-            <Col>
-              <Button className="button-next" onClick={this.nextPage}>Next</Button>
-            </Col>
-          </Row>
-
         </Container>
       </div>
     );
