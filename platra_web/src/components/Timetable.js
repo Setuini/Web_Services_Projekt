@@ -31,6 +31,7 @@ export class Timetable extends React.Component {
     this.prevPage = this.prevPage.bind(this);
     this.hasNext = this.hasNext.bind(this);
     this.hasPrev = this.hasPrev.bind(this);
+    this.getDay = this.getDay.bind(this);
   }
 
   // Fetch Data for given Time (startDate -> endDate)
@@ -95,6 +96,26 @@ export class Timetable extends React.Component {
     });
   }
 
+  getDay(weekday){
+    if (weekday === 1) {
+      return "Monday";
+    }else if(weekday === 2){
+      return "Tuesday";
+    }else if(weekday === 3){
+      return "Wednesday";
+    }else if(weekday === 4){
+      return "Thursday";
+    }else if(weekday === 5){
+      return "Friday";
+    }else if(weekday === 6){
+      return "Saturday";
+    }else if(weekday === 0){
+      return "Sunday";
+    }else{
+      return undefined;
+    }
+  }
+
   // create timetable according to days of the fetch
   render() {
     //var len = 0;
@@ -123,21 +144,19 @@ export class Timetable extends React.Component {
     var date = moment(this.state.startDate);
     var len = moment(this.state.endDate).diff(date, 'd');
     console.log(len);
-    for (var i=0; i < 4; i++) {
+    for (var i=0; i < len; i++) {
         date = moment(this.state.startDate).add(i,'d').format("DD/MM/YYYY");
-        //var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
-        timetableDays.push(<TimetableDay day="asdf" date={date} col={len} key={i}/>);
+        var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
+        timetableDays.push(<TimetableDay day={day} date={date} col={len} key={i}/>);
     }
+
     return (
         <Container>
-        <Row>
-<OwlCarousel 
-	className="owl-theme"
-	margin={10} nav
->
-        {timetableDays}
-        </OwlCarousel>
-        </Row>
+          <Row>
+            <OwlCarousel className="owl-theme" margin={10} nav>
+              {timetableDays}
+            </OwlCarousel>
+          </Row>
         </Container>
     );
   }
