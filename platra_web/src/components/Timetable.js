@@ -13,7 +13,6 @@ export class Timetable extends React.Component {
       endDate: props.location.endDate,
       location: props.location.location,
       jsonData: '',
-      data: '',
       errors: '',
       fetchInProgress: false
     };
@@ -21,10 +20,8 @@ export class Timetable extends React.Component {
     console.log(this.state);
     console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
     console.log("Timetable - endDate: "+moment(this.state.endDate).format("DD/MM/YYYY") );
-    */
-    //this.getDay = this.getDay.bind(this);
-    this.saveTimetable = this.saveTimetable.bind(this);
     console.log("Timetable - Location: "+this.state.location);
+    */
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
   }
@@ -51,7 +48,6 @@ export class Timetable extends React.Component {
       });
       this.setState({
         jsonData: JSON.stringify(resdata),
-        data: resdata,
         //desc: JSON.stringify(resdata.body),
         //img: resdata.url,
         fetchInProgress: false
@@ -67,42 +63,9 @@ export class Timetable extends React.Component {
   }
 
   // save timetable
-  saveTimetable() {
+  saveTimeTable() {
     console.log("Save timetable");
-    var data = this.state.data;
-
-    var myHeaders = new Headers();
-    myHeaders.append('Accept', 'application/json')
-    myHeaders.append('Content-Type', 'application/json');
-    myHeaders.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('jwt')));
-
-    this.setState({fetchInProgress: true});
-    fetch("http://localhost:3000/api/v1/places/save",{
-        method: 'POST',
-        headers: myHeaders,
-        mode: 'cors',
-        body: JSON.stringify({
-            timetable: data,
-            name: "Test" + Math.round(Math.random()*1000),
-            location: this.state.location
-        })
-    })
-    .then((res) => {
-      return res.json(); 
-    })
-    .then((resdata) => {
-      this.setState({
-        jsonData: JSON.stringify(resdata),
-        fetchInProgress: false
-      });
-    })
-    .catch( (ex) => {
-      console.log("Timetable - Fetch failed: " + ex);
-      this.setState({
-        errors : ex,
-        fetchInProgress: false 
-      });
-    });
+    console.log(this.state);
   }
 
   nextPage(){
@@ -132,17 +95,19 @@ export class Timetable extends React.Component {
     var start = this.state.startDate;
     var end = moment(start, 'DD/MM/YYYY').add(3, 'd');
     for (var i=0; i < numPages; i++){
+      console.log("Create Page");
       pages.push(<TimetablePage key={i} pageNumber={i} prevPage={this.prevPage} nextPage={this.nextPage} start={start} end={end} location={this.state.location}/>);
       start = end;
       end = moment(start, 'DD/MM/YYYY').add(3, 'd');
+
       if (moment(end).isAfter(this.state.endDate)) {
-        end = moment(this.state.endDate).add(1,'d');
+        end = moment(this.state.endDate);
       }
     }
 
     return (
       <div>
-        <Link onClick={this.saveTimetable} to="#">Save Timetable</Link>
+        <Link onClick={this.saveTimeTable} to="#">Save Timetable</Link>
         {pages[this.state.activePage]}
       </div>
     );

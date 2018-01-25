@@ -47,27 +47,33 @@ export class TimetablePage extends React.Component {
     var timetableDays = [];
     var date = moment(this.state.startDate);
     var len = moment(this.state.endDate).diff(date, 'd');
-    for (var i = 0; i < len; i++) {
+    console.log(len);
+    for (var i=0; i < len; i++) {
         date = moment(this.state.startDate).add(i,'d').format("DD/MM/YYYY");
         var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
-        timetableDays.push(<TimetableDay day={day} date={date} key={i}/>);
+        timetableDays.push(<TimetableDay day={day} date={date} col={len} key={i}/>);
     }
 
     return (
       <div>
         <Container>
           <Row>
-            <Col>
-              <Button onClick={this.prevPage}>Prev</Button>
-            </Col>
-            <Col>
-              <Button onClick={this.nextPage}>Next</Button>
-            </Col>
+            TimetablePage {this.state.pageNumber} Len={len} Start {moment(this.state.startDate).format('DD/MM/YYYY')} End {moment(this.state.endDate).format('DD/MM/YYYY')}
           </Row>
+
           <Row>
-              TimetablePage {this.state.pageNumber} Start {this.startDate} End {this.endDate}
               {timetableDays}
           </Row>
+
+          <Row>
+            <Col>
+              <Button className="button-prev" onClick={this.prevPage}>Prev</Button>
+            </Col>
+            <Col>
+              <Button className="button-next" onClick={this.nextPage}>Next</Button>
+            </Col>
+          </Row>
+
         </Container>
       </div>
     );
