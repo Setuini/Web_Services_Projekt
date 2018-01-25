@@ -90,12 +90,6 @@ export class TimetablePage extends React.Component {
     });
   }
 
-  setName(name){
-    this.setState({
-      timetable_name: name
-    });
-  }
-
   render() {
     var timetableDays = [];
     var date = moment(this.state.startDate);
