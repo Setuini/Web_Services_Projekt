@@ -24,13 +24,13 @@ class TimeTableController < ApplicationController
   #here pointofinterest is saved
   def savePoI
     msg = [];
-    if !(PointOfInterest.exists?(name: params[:name], longitude: params[:longitude], latitude: params[:latitude]))
-      poi = PointOfInterest.new(:location => params[:location],:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params]);
+    if !(PointOfInterest.exists?(place_id: params[:place_id]))
+      poi = PointOfInterest.new(:location => params[:location],:name => params[:name], :longitude => params[:longitude], :latitude => params[:latitude], :params => params[:params], :types =>[:types], place_id => params[:place_id]);
       poi.save
       msg.push('PointOfInterest created successfully');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
     else
-      msg.push('PointOfInterest not created');
+      msg.push('PointOfInterest already created');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 422
     end
   end
@@ -53,9 +53,9 @@ class TimeTableController < ApplicationController
 
   def timeTableEntry
     msg = [];
-    if !(PointOfInterest.exists?(name: params[:nameP], longitude: params[:longitude], latitude: params[:latitude])) || !(TimeTable.exists?(name: params[:nameT], user_id: current_user.id))
-      table = TimeTable.find_by name: params[:nameT], user_id: current_user.id;
-      poi = PointOfInterest.find_by name: params[:name], longitude: params[:longitude], latitude: params[:latitude]
+    if !(PointOfInterest.exists?(place_id: params[:place_id])) || !(TimeTable.exists?(name: params[:nameT], user_id: current_user.id))
+      table = TimeTable.find_by place_id: params[:nameT], user_id: current_user.id;
+      poi = PointOfInterest.find_by place_id: params[:place_id]
       td = TimeTableEntry.new(:point_of_interest_id => poi.id,time_table_id => table.id,:begin => params[:begin], :end => params[:end]);
       td.save
       msg.push('PointOfInterest created successfully');
