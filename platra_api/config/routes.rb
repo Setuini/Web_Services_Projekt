@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get '/api/v1/users' => 'users#index'
 
     post '/api/v1/places' => 'api_events#show'
-    post '/api/v1/places/save' => 'api_events#show'
+    post '/api/v1/places/save' => 'time_table#saveTimeTable'
     get '/api/v1/places' => 'time_table#indexTimeTables'
     get '/api/v1/places/:id' => 'time_table#indexTimeTables'
 
