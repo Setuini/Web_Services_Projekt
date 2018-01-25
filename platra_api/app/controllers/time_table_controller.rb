@@ -1,6 +1,23 @@
 class TimeTableController < ApplicationController
     before_action :authenticate_user
 
+    def get_activity_time(activity)
+        case activity
+        when "breakfast"
+            return [Time.parse("08:00"), Time.parse("10:00")]
+        when "morning_activity"
+            return [Time.parse("10:00"), Time.parse("12:00")]
+        when "lunch"
+            return [Time.parse("12:00"), Time.parse("14:00")]
+        when "afternoon_activity"
+            return [Time.parse("14:00"), Time.parse("18:00")]
+        when "dinner"
+            return [Time.parse("18:00"), Time.parse("20:00")]
+        when "evening_activity"
+            return [Time.parse("20:00"), Time.parse("24:00")]
+        end
+    end
+
     #all timetables for the specific user are shown
     def indexTimeTables
         @time_tables = TimeTable.find_by user_id: current_user.id
@@ -17,7 +34,10 @@ class TimeTableController < ApplicationController
 
             params["timetable"].each do |date, activities|
                 activities.each do |activity, value|
-                    saveTimeTableEntry(timetable.id, value["place_id"], date, activity)
+                    logger.debug(activity)
+                    time_begin = Date.parse(date) + get_activity_time(activity)[0].seconds_since_midnight.seconds
+                    time_end = Date.parse(date) + get_activity_time(activity)[1].seconds_since_midnight.seconds
+                    saveTimeTableEntry(timetable.id, value["place_id"], time_begin, time_end, activity)
                 end
             end
 
@@ -87,13 +107,13 @@ class TimeTableController < ApplicationController
         end
     end
 
-    def saveTimeTableEntry(timetable_id, place_id, date, activity)
+    def saveTimeTableEntry(timetable_id, place_id, time_begin, time_end, activity)
         msg = [];
 
         if (PointOfInterest.exists?(place_id: place_id)) && (TimeTable.exists?(id: timetable_id, user_id: current_user.id))
             poi = PointOfInterest.find_by place_id: place_id
-            if !TimeTableEntry.exists?(time_table_id: timetable_id, point_of_interest_id: poi.id, begin: date, end: date)
-                td = TimeTableEntry.new(:point_of_interest_id => poi.id, :time_table_id => timetable_id, :begin => date, :end => date, :types => activity);
+            if !TimeTableEntry.exists?(time_table_id: timetable_id, point_of_interest_id: poi.id, begin: time_begin, end: time_end)
+            td = TimeTableEntry.new(:point_of_interest_id => poi.id, :time_table_id => timetable_id, :begin => time_begin, :end => time_end, :types => activity);
                 td.save
                 return true
             end
