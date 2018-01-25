@@ -13,13 +13,11 @@ export class Routes extends Component {
   render() {
     return (
   		<div>
-        
   			<Route exact path="/" component={Landing}/>
   			<Route path="/timetable" component={Timetable}/>
   			<Route path="/login" component={LoginPage}/>
   			<Route path="/register" component={RegisterPage}/>
         <Route  path="/auth" component={AuthTest}/>
-
   		</div>
     );
   }
