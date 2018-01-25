@@ -185,11 +185,11 @@ class ApiEventsController < ApplicationController
             threads.each {|t| t.join}
 
             for item in day
-                #poi = item[1]
-                #if poi && !(PointOfInterest.exists?(name: poi["name"], longitude: poi["lng"], latitude: poi["lat"]))
-                    #poi_db = PointOfInterest.new(:name => poi["name"], :longitude => poi["lng"], :latitude => poi["lat"], :params => poi.to_json);
-                  #poi_db.save
-                #end
+                poi = item[1]
+                if poi && !(PointOfInterest.exists?(place_id: poi["place_id"]))
+                    poi_db = PointOfInterest.new(:name => poi["name"], :longitude => poi["lng"], :latitude => poi["lat"], :place_id => poi["place_id"], :params => poi.to_json);
+                  poi_db.save
+                end
 
                 #logger.debug duplicate_activities.include?(item[1]["place_id"])
                 #if !duplicate_activities.include?(item[1]["place_id"]) 
