@@ -1,16 +1,6 @@
 import React from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom'
+import { Collapse,Navbar, NavbarToggler, Nav } from 'reactstrap';
+import { Link, Redirect } from 'react-router-dom'
 //import { DropdownLogin } from './DropdownLogin.js';
 
 export class NavbarPlatraLoggedIn extends React.Component {
@@ -19,19 +9,20 @@ export class NavbarPlatraLoggedIn extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      fireRedirect: false
     };
+
+    this.onLogout = this.props.onLogout;
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
 
-  logout() {
-    localStorage.clear();
-    this.props.history.push('/')
-  }
+
 
   render() {
     return (
@@ -44,7 +35,8 @@ export class NavbarPlatraLoggedIn extends React.Component {
 
               <Link className="nav-link" to="/timetable">Timetables</Link>
               <Link className="nav-link" to="/">Profile</Link>
-              <Link className="nav-link" onClick={this.logout} to="/">Logout</Link>
+
+              <a className="nav-link" onClick={this.onLogout}>Logout</a>
              
             </Nav>
           </Collapse>
