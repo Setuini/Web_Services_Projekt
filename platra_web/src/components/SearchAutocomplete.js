@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PlacesAutocomplete from 'react-places-autocomplete'
-import { Link } from 'react-router-dom'
+import PlacesAutocomplete from 'react-places-autocomplete';
+import { Link } from 'react-router-dom';
 
 export class SearchAutocomplete extends Component {
 
@@ -13,10 +13,12 @@ export class SearchAutocomplete extends Component {
 
     const timetable_to = {
         pathname: "/timetable",
-        location: "Innsbruck",
-        startDate: "test",
-        endDate: "test"
+        location: this.props.location,
+        startDate: this.props.start,
+        endDate: this.props.end
     }
+
+    console.log("Timetable - timetable_to"+timetable_to.location+" "+timetable_to.startDate+" "+timetable_to.endDate);
 
     return (
       <div onSubmit={this.handleSubmit}>

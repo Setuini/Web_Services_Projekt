@@ -26,23 +26,25 @@ export class Search extends React.Component {
     for (var i=1; i < 120; i++) {
       days[i] = moment(this.state.endDate).add(i,"days");
     }
+    console.log("Search - Set Start Date:"+moment(date).format("DD/MM/YYYY"));
     this.setState({
       startDate: date,
-      endDate: moment(date).add(1, "days"),
       includeDays: days
     });
+    this.setEnd(moment(date).add(1, "days"));
   }
 
   setEnd(date){
+    console.log("Search - Set End Date:"+moment(date).format("DD/MM/YYYY"));
     this.setState({
       endDate: date
     });
   }
 
-  setLocation(event){
-    console.log("Search - Set Location:"+event);
+  setLocation(location){
+    console.log("Search - Set Location:"+location);
     this.setState({
-      location: event
+      location: location
     });
   }
 
@@ -66,7 +68,7 @@ export class Search extends React.Component {
           <Row>
               <Col xs="12">
                   <div className="form-destination">
-                    <SearchAutocomplete location={this.state.location} onChange={this.setLocation}/>
+                    <SearchAutocomplete location={this.state.location} start={this.state.startDate} end={this.state.endDate} onChange={this.setLocation}/>
                   </div>
               </Col>
           </Row>

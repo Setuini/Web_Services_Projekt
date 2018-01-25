@@ -1,8 +1,7 @@
 import React  from 'react';
 import { Container, Row } from 'reactstrap';
-
 import { TimetableDay } from './TimetableDay.js';
-
+import moment from 'moment';
 
 export class Timetable extends React.Component {
     constructor(props){
@@ -14,17 +13,15 @@ export class Timetable extends React.Component {
       jsonData: '',
       errors: '',
       fetchInProgress: false
-    };console
+    };
 
-    console.log("Timetable - startDate:"+props.location.startDate);
-    console.log("Timetable - endDate:"+props.location.endDate);
-    console.log("Timetable - Location:"+props.location.location);
+    console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
+    console.log("Timetable - endDate: "+moment(this.state.endDate).format("DD/MM/YYYY") );
+    console.log("Timetable - Location: "+this.state.location);
   }
-
 
   // Fetch Data for given Time (startDate -> endDate)
   componentDidMount(){
-
     var myHeaders = new Headers();
     myHeaders.append('Accept', 'application/json')
     myHeaders.append('Content-Type', 'application/json');
@@ -60,6 +57,17 @@ export class Timetable extends React.Component {
 
   // create timetable according to days of the fetch
   render() {
+
+/*
+    var a = moment(this.state.startDate.format("DD/MM/YYYY"));
+    var b = moment(this.state.startDate.format("DD/MM/YYYY"));
+    var len = a.diff(b, 'days');
+    console.log(len);*/
+
+
+    
+    
+
     return (
       <div>
         <Container>

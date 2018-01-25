@@ -2,7 +2,6 @@ import React from 'react';
 import {  } from 'reactstrap';
 import { TimetableActivity } from './TimetableActivity.js';
 
-
 export class TimetableDay extends React.Component {
 
   constructor(props){
