@@ -5,6 +5,7 @@ class CreateTimeTableEntries < ActiveRecord::Migration[5.1]
       t.bigint :point_of_interest_id, null:false
       t.datetime :begin, null:false
       t.datetime :end, null:false
+      t.string :types
       t.timestamps
     end
     add_foreign_key :time_table_entries, :time_tables

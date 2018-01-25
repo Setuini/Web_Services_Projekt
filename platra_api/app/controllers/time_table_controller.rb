@@ -53,10 +53,10 @@ class TimeTableController < ApplicationController
 
   def timeTableEntry
     msg = [];
-    if !(PointOfInterest.exists?(place_id: params[:place_id])) || !(TimeTable.exists?(name: params[:nameT], user_id: current_user.id))
-      table = TimeTable.find_by place_id: params[:nameT], user_id: current_user.id;
+    if !(PointOfInterest.exists?(place_id: params[:place_id])) || !(TimeTable.exists?(name: params[:name], user_id: current_user.id))
+      table = TimeTable.find_by place_id: params[:name], user_id: current_user.id;
       poi = PointOfInterest.find_by place_id: params[:place_id]
-      td = TimeTableEntry.new(:point_of_interest_id => poi.id,time_table_id => table.id,:begin => params[:begin], :end => params[:end]);
+      td = TimeTableEntry.new(:point_of_interest_id => poi.id,time_table_id => table.id,:begin => params[:begin], :end => params[:end], :types => params[:types]);
       td.save
       msg.push('PointOfInterest created successfully');
       render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
