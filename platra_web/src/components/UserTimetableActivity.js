@@ -95,13 +95,13 @@ export class UserTimetableActivity extends React.Component {
             image = <div className="activity-loading"></div>;
         } else {
             var p = this.state.data.point_of_interest.params;
-            /*if(typeof p !== 'undefined'){
+            if(typeof p !== 'undefined'){
                 var i = JSON.parse(p);
-                if(typeof i !== 'undefined' && i.photos.length >0){
+                if(i != null && typeof i !== 'undefined' && i.photos.length >0){
                     this.state.img = i.photos[0]
                 }
             }
-            image = <img src={this.state.img} className="activity-img" alt=""/>;*/
+            image = <img src={this.state.img} className="activity-img" alt=""/>;
         }
         return (
             <div>
