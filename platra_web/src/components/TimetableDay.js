@@ -19,10 +19,19 @@ export class TimetableDay extends React.Component {
     var activietesPerDay = 5;
     var timetableActivities = [];
     var activities = this.state.activities;
+    var previous_activity = null;
     Object.keys(activities).forEach(function(key) {
-        console.log(activities[key]);
         var activity = activities[key];
-        timetableActivities.push(<TimetableActivity key={key} time={activity["time"]} heading={activity["name"]} photo={activity["photos"][0]}/>);
+        if(previous_activity == null)  {
+            previous_activity = activity;
+        }
+        var opening_hours = "";
+        if(activity["opening_hours"] != null) {
+            opening_hours = activity["opening_hours"].weekday_text;
+        }
+        console.log("Timetableday: " + activity["lat"] + " " + activity["lng"]);
+        timetableActivities.push(<TimetableActivity key={key} lat={activity["lat"]} lng={activity["lng"]} lat2={previous_activity["lat"]} lng2={previous_activity["lng"]} hours={opening_hours} time={activity["time"]} heading={activity["name"]} photo={activity["photos"][0]}/>);
+        previous_activity = activity;
     });
     console.log(timetableActivities);
 

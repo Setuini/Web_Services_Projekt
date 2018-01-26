@@ -1,6 +1,8 @@
 import React from 'react';
-import {  } from 'reactstrap';
+import { Modal } from 'reactstrap';
 import moment from 'moment';
+import { LocationModal } from './LocationModal.js';
+import { InformationModal } from './InformationModal.js';
 
 export class TimetableActivity extends React.Component {
     constructor(){
@@ -8,7 +10,10 @@ export class TimetableActivity extends React.Component {
         this.state = {
             heading: 'Placeholder Heading',
             img: '',
+            hours: '',
             time: '',
+            lat: '',
+            lng: '',
             errors: '',
             fetchInProgress: false
         };
@@ -25,7 +30,10 @@ export class TimetableActivity extends React.Component {
         this.setState({
             heading: this.props.heading,
             img: this.props.photo,
-            time: this.props.time
+            time: this.props.time,
+            hours: this.props.hours,
+            lat: this.props.lat,
+            lng: this.props.lng
         });
     }
 
@@ -38,6 +46,10 @@ export class TimetableActivity extends React.Component {
         }
         var startTime = moment(this.state.time[0]).subtract(1, "h").format("kk:mm");
         var endTime = moment(this.state.time[1]).subtract(1, "h").format("kk:mm");
+        var information = "";
+        if(this.props.hours) {
+            information = <InformationModal data={this.props.hours} />
+        }
 
         return (
             <div>
@@ -48,8 +60,8 @@ export class TimetableActivity extends React.Component {
             </div>
             <div className="activity-text-wrapper">
             <h3 className="activity-heading"> {this.state.heading} </h3>
-            <p><a className="activity-link" href=""><i className="fa fa-info-circle fa-fw" aria-hidden="true"></i> More Information</a></p>
-            <p><a className="activity-link" href=""><i className="fa fa-map-o fa-fw" aria-hidden="true"></i> Location</a></p>
+            {information}
+            <LocationModal lat={this.props.lat} lng={this.props.lng} lat2={this.props.lat2} lng2={this.props.lng2} /> 
             </div>
             </div>
             </div>
