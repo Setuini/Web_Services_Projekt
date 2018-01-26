@@ -3,17 +3,17 @@ class TimeTableController < ApplicationController
 
     def get_activity_time(activity)
         case activity
-        when "breakfast"
+        when 0 
             return [Time.parse("08:00"), Time.parse("10:00")]
-        when "morning_activity"
+        when 1 
             return [Time.parse("10:00"), Time.parse("12:00")]
-        when "lunch"
+        when 2 
             return [Time.parse("12:00"), Time.parse("14:00")]
-        when "afternoon_activity"
+        when 3 
             return [Time.parse("14:00"), Time.parse("18:00")]
-        when "dinner"
+        when 4 
             return [Time.parse("18:00"), Time.parse("20:00")]
-        when "evening_activity"
+        when 5 
             return [Time.parse("20:00"), Time.parse("24:00")]
         end
     end
