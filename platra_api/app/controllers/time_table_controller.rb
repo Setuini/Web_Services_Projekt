@@ -49,10 +49,11 @@ class TimeTableController < ApplicationController
     end
 
     def deleteTimeTable
-        msg[];
+        msg = [];
+
         if (TimeTable.exists?(name: params[:name], user_id: current_user.id))
             timetable = TimeTable.find_by user_id: current_user.id, name: params[:name]
-            timetable.delete;
+            timetable.destroy;
             msg.push('TimeTable deleted successfully');
             render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
         else

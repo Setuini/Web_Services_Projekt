@@ -15,6 +15,7 @@ export class UserTimetablePage extends React.Component {
         };
         this.prevPage = this.props.prevPage;
         this.nextPage = this.props.nextPage;
+        this.deletePage = this.deletePage.bind(this);
         this.getDay = this.getDay.bind(this);
     }
 
@@ -36,6 +37,38 @@ export class UserTimetablePage extends React.Component {
         }else{
             return undefined;
         }
+    }
+
+    deletePage(){
+        var myHeaders = new Headers();
+        myHeaders.append('Accept', 'application/json')
+        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('jwt')));
+        //console.log("Timetable.js - Fetch");
+
+        this.setState({fetchInProgress: true});
+        fetch("http://localhost:3000/api/v1/deletePage",{
+            method: 'POST',
+            headers: myHeaders,
+            mode: 'cors',
+            body: JSON.stringify({
+                name: this.state.jsonData.name,
+            })
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((resdata) => {
+                Object.keys(resdata).forEach(function(key) {
+                });
+            })
+            .catch( (ex) => {
+                console.log("Timetable - Fetch failed: " + ex);
+                this.setState({
+                    errors : ex,
+                    fetchInProgress: false
+                });
+            });
     }
 
     render() {
@@ -66,6 +99,7 @@ export class UserTimetablePage extends React.Component {
                     <Row>
                         <Button onClick={this.prevPage}>Prev</Button>
                         <Button onClick={this.nextPage}>Next</Button>
+                        <Button onClick={this.deletePage}>Delete</Button>
                         UserTimetableDay {this.state.pageNumber} Start {this.startDate} End {this.endDate}
                         {timetableDays}
                     </Row>

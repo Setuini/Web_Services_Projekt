@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Alert, Container, Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
 
 export class RegisterPage extends React.Component {
@@ -10,7 +11,9 @@ export class RegisterPage extends React.Component {
       name: 'Test',
       email: 'test@test.at',
       password: 'test',
-      password_validate: 'test'
+      password_validate: 'test',
+      fireRedirect: false,
+      errors: ''
     };
 
     //if the function needs to access the state it has to be bound
@@ -36,7 +39,7 @@ export class RegisterPage extends React.Component {
       email: this.state.email,
       password: this.state.password,
       password_confirmation: this.state.password_validate
-    })
+    });
 
     fetch("http://127.0.0.1:3000/api/v1/register",{
         method: 'POST',
@@ -50,16 +53,39 @@ export class RegisterPage extends React.Component {
     .then((resdata) => {
       console.log('Response Register:\n');
       console.log(JSON.stringify(resdata)); 
-      this.setState( {msg: JSON.stringify(resdata)} );
+      this.setState({
+        msg: JSON.stringify(resdata),
+      });
+
+      //if msg contoins no errors
+      if (this.state.msg.includes("successfully") ) {
+        console.log("redirect");
+        this.setState({
+          fireRedirect: true
+        });
+      }else{
+        var result = this.state.msg.substring(10, this.state.msg.length-4);
+        this.setState({
+          errors: result 
+        });
+      }
+
     })
     .catch( (ex) => {
       console.log("Fetch failed" + ex);
+      this.setState({
+        errors: "Registration failed"
+      })
     });
 
     event.preventDefault();
   }
 
   render() {
+    this.error = null;
+    if (this.state.errors !== '') {
+      this.error = <Alert color="danger" className="error">{this.state.errors}</Alert>;
+    }
     return (
       <Container>
         <Row>
@@ -75,7 +101,7 @@ export class RegisterPage extends React.Component {
                 <Input type="password" name="password" placeholder="Password" onChange={this.handleChange} required/>
               </FormGroup>
               <FormGroup>
-                <Input type="password" name="password" placeholder="Password confirmation" onChange={this.handleChange} required/>
+                <Input type="password" name="password_validate" placeholder="Password confirmation" onChange={this.handleChange} required/>
               </FormGroup>
             
               <FormGroup check>
@@ -85,7 +111,15 @@ export class RegisterPage extends React.Component {
                 </Label>
               </FormGroup>
 
+              <Row>
+                <Col>
+                  {this.error}
+                </Col>
+              </Row>
+
               <Button block type="submit" className="button-platra">Register</Button>
+              
+              {this.state.fireRedirect && (<Redirect to={'/login'}/>)}
             </Form>
           </Col>
         </Row>
