@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20171111171059) do
     t.bigint "user_id", null: false
     t.string "name", null: false
     t.string "location", null: false
+    t.date "start", null: false
+    t.date "finish", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "name"], name: "my_time_table_index", unique: true

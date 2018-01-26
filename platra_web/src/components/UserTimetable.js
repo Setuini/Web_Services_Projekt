@@ -7,12 +7,11 @@ export class UserTimetable extends React.Component {
         this.state = {
             activePage: 0,
             pages: 1,
-            jsonDataSaved: JSON,
             data: '',
             errors: '',
             fetchInProgress: false
         };
-
+        this.jsonDataSaved;
         //this.getDay = this.getDay.bind(this);
         this.nextPage = this.nextPage.bind(this);
         this.prevPage = this.prevPage.bind(this);
@@ -38,8 +37,8 @@ export class UserTimetable extends React.Component {
             .then((resdata) => {
                 Object.keys(resdata).forEach(function(key) {
                 });
+                this.jsonDataSaved = resdata;
                 this.setState({
-                    jsonDataSaved: resdata,
                     data: resdata,
                     //desc: JSON.stringify(resdata.body),
                     //img: resdata.url,
@@ -71,8 +70,8 @@ export class UserTimetable extends React.Component {
     // create timetable according to days of the fetch
     render() {
         var pages=[];
-        for (var i in this.state.jsonDataSaved) {
-            pages.push(<UserTimetablePage key={i} pageNumber={i} prevPage={this.prevPage} nextPage={this.nextPage} jsonData={this.state.jsonDataSaved[i]}/>);
+        for (var i in this.jsonDataSaved) {
+            pages.push(<UserTimetablePage key={i} pageNumber={i} prevPage={this.prevPage} nextPage={this.nextPage} jsonData={this.jsonDataSaved[i]}/>);
         }
 
         return (
