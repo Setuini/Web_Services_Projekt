@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     end
 
     def validate(user,params)
-        if params[:name].length > 255 || params[:name].length == 0 || params[:email].length > 255 || params[:email].length == 0 || params[:password].length > 255 || params[:password].length == 0 || params[:password] != params[:password_confirmation]
+        if params[:name].length > 255 || params[:name].length == 0 || params[:email].length > 255 || params[:email].length < 4 || params[:password].length > 255 || params[:password].length < 4 || params[:password] != params[:password_confirmation]
             false
         else
             true
