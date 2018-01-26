@@ -8,6 +8,7 @@ export class UserTimetableDay extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            name: props.name,
             dayData: props.dayData,
             date: props.date,
             day: props.day
@@ -17,7 +18,7 @@ export class UserTimetableDay extends React.Component {
     render() {
         var timetableActivities = [];
         for (var i in this.state.dayData) {
-            timetableActivities.push(<UserTimetableActivity key={i} data={this.state.dayData[i]}/>);
+            timetableActivities.push(<UserTimetableActivity key={i} data={this.state.dayData[i]} name={this.state.name}/>);
         }
 
 

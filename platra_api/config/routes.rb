@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     post '/api/v1/places/save' => 'time_table#saveTimeTable'
     get '/api/v1/places' => 'time_table#indexTimeTables'
     get '/api/v1/places/:id' => 'time_table#indexTimeTables'
+
     post '/api/v1/deletePage' => 'time_table#deleteTimeTable'
+    post '/api/v1/deleteEntry' => 'time_table#deleteTimeTableEntry'
 
 end

@@ -90,7 +90,7 @@ export class UserTimetablePage extends React.Component {
             var date = new Date(key);
             var date = moment(date).format("DD/MM/YYYY");
             var day = self.getDay(moment(date).day());
-            timetableDays.push(<UserTimetableDay day={day} date={date} key={key} dayData={value}/>);
+            timetableDays.push(<UserTimetableDay day={day} date={date} key={key} dayData={value} name={self.state.jsonData.name}/>);
         })
 
         return (
