@@ -201,7 +201,7 @@ class ApiEventsController < ApplicationController
             }
 
             threads << Thread.new { 
-                day[4] = create_poi_object(restaurants[2], "dinner", 4)
+                day[4] = create_poi_object(restaurants[2], 4)
             }
 
             threads << Thread.new { 
