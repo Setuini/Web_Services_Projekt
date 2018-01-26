@@ -37,6 +37,7 @@ class ApiEventsController < ApplicationController
 
     def initialize
         places_keys = [
+            'AIzaSyC_zIUzHMQBpYdQi4ySdHW_8d7duuCb5dM',
             'AIzaSyAvIM-BatjjbH5i-ZfJaFA6OudweMTa7aI',
             'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
             'AIzaSyA0009rGVaq3T3uQ3f17TfrJX_IrtTjtvQ',
