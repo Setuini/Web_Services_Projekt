@@ -17,8 +17,10 @@ export class UserTimetableDay extends React.Component {
 
     render() {
         var timetableActivities = [];
+        var before = 0;
         for (var i in this.state.dayData) {
-            timetableActivities.push(<UserTimetableActivity key={i} data={this.state.dayData[i]} name={this.state.name}/>);
+            timetableActivities.push(<UserTimetableActivity key={i} data={this.state.dayData[i]} name={this.state.name} longitude={this.state.dayData[before].point_of_interest.longitude} latitude={this.state.dayData[before].point_of_interest.latitude}/>);
+            before = i;
         }
 
 

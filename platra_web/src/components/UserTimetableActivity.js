@@ -13,6 +13,10 @@ export class UserTimetableActivity extends React.Component {
             desc: props.data.point_of_interest.type,
             begin: new Date(props.data.begin),
             end: new Date(props.data.end),
+            lat1: props.data.point_of_interest.latitude,
+            lat2: props.latitude,
+            lon1: props.longitude,
+            lon2: props.data.point_of_interest.longitude,
             img: '',
             errors: '',
             fetchInProgress: false
@@ -96,7 +100,7 @@ export class UserTimetableActivity extends React.Component {
             image = <div className="activity-loading"></div>;
         } else {
             var p = this.state.data.point_of_interest.params;
-            if(typeof p !== 'undefined'){
+            if(typeof p !== 'undefined'){1
                 var i = JSON.parse(p);
                 if(i != null && typeof i !== 'undefined' && i.photos.length >0){
                     this.state.img = i.photos[0]
@@ -115,7 +119,7 @@ export class UserTimetableActivity extends React.Component {
                     <div className="activity-text-wrapper">
                         <h3 className="activity-heading"> {this.state.heading} </h3>
                         <p className="activity-description">{this.state.desc}</p>
-                        <LocationModal lat={this.state.data.point_of_interest.latitude} lng={this.state.data.point_of_interest.longitude} lat2={this.state.data.point_of_interest.latitude} lng2={this.state.data.point_of_interest.longitude} />
+                        <LocationModal lat={this.state.lat1} lng={this.state.lon1} lat2={this.state.lat2} lng2={this.state.lon2} />
                         <button onClick={this.delete}>Delete</button>
                     </div>
                 </div>
