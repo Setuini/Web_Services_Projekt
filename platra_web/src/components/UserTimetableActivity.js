@@ -1,5 +1,6 @@
 import React from 'react';
 import {  } from 'reactstrap';
+import { LocationModal } from './LocationModal.js';
 
 export class UserTimetableActivity extends React.Component {
 
@@ -103,6 +104,7 @@ export class UserTimetableActivity extends React.Component {
             }
             image = <img src={this.state.img} className="activity-img" alt=""/>;
         }
+
         return (
             <div>
                 <h3 className="activitiy-time">{this.state.begin.toTimeString()} - {this.state.end.toTimeString()}</h3>
@@ -113,13 +115,13 @@ export class UserTimetableActivity extends React.Component {
                     <div className="activity-text-wrapper">
                         <h3 className="activity-heading"> {this.state.heading} </h3>
                         <p className="activity-description">{this.state.desc}</p>
-                        <p><a className="activity-link" href=""><i className="fa fa-info-circle fa-fw" aria-hidden="true"></i> More Information</a></p>
-                        <p><a className="activity-link" href=""><i className="fa fa-map-o fa-fw" aria-hidden="true"></i> Location</a></p>
+                        <LocationModal lat={this.state.data.point_of_interest.latitude} lng={this.state.data.point_of_interest.longitude} lat2={this.state.data.point_of_interest.latitude} lng2={this.state.data.point_of_interest.longitud} />
                         <button onClick={this.delete}>Delete</button>
                     </div>
                 </div>
             </div>
         );
+
     }
 
 }
