@@ -6,6 +6,7 @@ export class UserTimetableActivity extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            name: props.name,
             data: props.data,
             heading: props.data.point_of_interest.name,
             desc: props.data.point_of_interest.type,
@@ -15,6 +16,7 @@ export class UserTimetableActivity extends React.Component {
             errors: '',
             fetchInProgress: false
         };
+        this.delete = this.delete.bind(this);
     }
 
     /*componentDidMount(){
@@ -53,6 +55,40 @@ export class UserTimetableActivity extends React.Component {
 
     }*/
 
+    delete(){
+        var myHeaders = new Headers();
+        myHeaders.append('Accept', 'application/json')
+        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('jwt')));
+        //console.log("Timetable.js - Fetch");
+
+        this.setState({fetchInProgress: true});
+        fetch("http://localhost:3000/api/v1/deleteEntry",{
+            method: 'POST',
+            headers: myHeaders,
+            mode: 'cors',
+            body: JSON.stringify({
+                name: this.state.name,
+                place_id: this.state.data.point_of_interest.place_id,
+                begin: this.state.data.begin,
+                end: this.state.data.end,
+            })
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((resdata) => {
+                Object.keys(resdata).forEach(function(key) {
+                });
+            })
+            .catch( (ex) => {
+                console.log("Timetable - Fetch failed: " + ex);
+                this.setState({
+                    errors : ex,
+                    fetchInProgress: false
+                });
+            });
+    }
     render() {
         var image;
         if (this.state.fetchInProgress){
@@ -72,6 +108,7 @@ export class UserTimetableActivity extends React.Component {
                         <p className="activity-description">{this.state.desc}</p>
                         <p><a className="activity-link" href=""><i className="fa fa-info-circle fa-fw" aria-hidden="true"></i> More Information</a></p>
                         <p><a className="activity-link" href=""><i className="fa fa-map-o fa-fw" aria-hidden="true"></i> Location</a></p>
+                        <button onClick={this.delete}>Delete</button>
                     </div>
                 </div>
             </div>
