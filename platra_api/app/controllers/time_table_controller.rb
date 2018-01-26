@@ -33,10 +33,13 @@ class TimeTableController < ApplicationController
             timetable.save
 
             params["timetable"].each do |date, activities|
-                activities.each_with_index do |(activity, value), index|
+                index = 0
+                activities.each do |activity, value|
+                    
                     time_begin = Date.parse(date) + get_activity_time(index)[0].seconds_since_midnight.seconds
                     time_end = Date.parse(date) + get_activity_time(index)[1].seconds_since_midnight.seconds
                     saveTimeTableEntry(timetable.id, value["place_id"], time_begin, time_end, index)
+                    index = index + 1
                 end
             end
 
@@ -125,7 +128,7 @@ class TimeTableController < ApplicationController
     def deleteTimeTableEntry
         msg = [];
         if (PointOfInterest.exists?(place_id: params[:place_id])) && (TimeTable.exists?(name: params[:name], user_id: current_user.id))
-            table = TimeTable.find_by name: params[:name], user_id: current_user.id;
+            table = TimeTable.find_by place_id: params[:name], user_id: current_user.id;
             poi = PointOfInterest.find_by place_id: params[:place_id]
             if TimeTableEntry.exists?(time_table_id: table.id, begin: params[:begin], end: params[:end])
                 td = TimeTableEntry.find_by time_table_id: table.id, begin: params[:begin], end: params[:end]
