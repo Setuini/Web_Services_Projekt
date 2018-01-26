@@ -19,6 +19,7 @@ export class Timetable extends React.Component {
       timetable_name: '',
       fetchInProgress: false
     };
+
     /*
     console.log(this.state);
     console.log("Timetable - startDate: "+moment(this.state.startDate).format("DD/MM/YYYY"));
@@ -28,8 +29,10 @@ export class Timetable extends React.Component {
     this.saveTimetable = this.saveTimetable.bind(this);
     this.setTimetableName = this.setTimetableName.bind(this);
     console.log("Timetable - Location: "+this.state.location);
+
   }
 
+/* Merge not sure
   // Fetch Data for given Time (startDate -> endDate)
   componentDidMount(){
     var myHeaders = new Headers();
@@ -70,6 +73,7 @@ export class Timetable extends React.Component {
     });
   }
 
+
   getDay(weekday){
     if (weekday === 1) {
       return "Monday";
@@ -88,7 +92,7 @@ export class Timetable extends React.Component {
     }else{
       return undefined;
     }
-  }
+  }*/
 
   // save timetable
   saveTimetable() {
@@ -131,9 +135,9 @@ export class Timetable extends React.Component {
   }
 
   setTimetableName(name){
-    console.log("Search - Set Name:"+name);
+    console.log("Search - Set Name:"+name.target.value);
     this.setState({
-      timetable_name: name
+      timetable_name: name.target.value
     });
   }
 
@@ -157,7 +161,6 @@ export class Timetable extends React.Component {
     }
   }
 
-  // create timetable according to days of the fetch
   render() {
     var timetableDays = [];
     //var date = moment(this.state.startDate);
@@ -170,32 +173,21 @@ export class Timetable extends React.Component {
         timetableDays.push(<TimetableDay activities={data[key]} day={weekday} date={date} />);
     });
 
-    //for(var i=0; i < len; i++) {
-
-        //date = moment(this.state.startDate).add(i,'d').format("DD/MM/YYYY");
-        //var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
-        //timetableDays.push(<TimetableDay heading="test" day={day} date={date} col={len} key={i}/>);
-    //}
-
-
     return (
         <Container>
-<Row>
-        <Col>
-                <InputGroup>
-                <Input ref="input" type="text" placeholder="Name" onChange={this.setTimetableName}  /> 
-                  <InputGroupAddon className='input-group-append'><Button className="button-platra" onClick={this.saveTimetable}>Save Timetable</Button></InputGroupAddon>
-                </InputGroup>
-        </Col>
-        </Row>
-        <Row>
-<OwlCarousel 
-	className="owl-theme"
-	margin={10} nav
->
-        {timetableDays}
-        </OwlCarousel>
-        </Row>
+          <Row>
+            <Col>
+              <InputGroup>
+              <Input ref="input" type="text" placeholder="Name" onChange={this.setTimetableName}/> 
+                <InputGroupAddon className='input-group-append'><Button className="button-platra" onClick={this.saveTimetable}>Save Timetable</Button></InputGroupAddon>
+              </InputGroup>
+            </Col>
+          </Row>
+          <Row>
+            <OwlCarousel className="owl-theme" margin={10} nav>
+              {timetableDays}
+            </OwlCarousel>
+          </Row>
         </Container>
     );
   }

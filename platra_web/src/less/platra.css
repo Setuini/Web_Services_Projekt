@@ -200,3 +200,6 @@ input {
 .plan {
   height: 100vh;
 }
+.error {
+  padding: 0.375rem 0.75rem;
+}
