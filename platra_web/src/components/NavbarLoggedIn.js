@@ -24,7 +24,7 @@ export class NavbarPlatraLoggedIn extends React.Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <Link className="nav-link" to="/">Platra</Link>
+          <Link className="navbar-brand" to="/">Platra</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

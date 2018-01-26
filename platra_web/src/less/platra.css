@@ -243,7 +243,7 @@ input {
 .loader .smallBox {
   height: 3em;
   width: 3em;
-  background-color: #34495e;
+  background-color: #FB775A;
   position: fixed;
   z-index: 1;
   outline: 1px solid transparent;
@@ -264,4 +264,7 @@ input {
   100% {
     transform: rotate(90deg);
   }
+}
+.navbar-brand {
+  color: #FB775A !important;
 }
