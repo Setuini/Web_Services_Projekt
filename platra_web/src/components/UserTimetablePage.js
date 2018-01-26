@@ -103,6 +103,8 @@ export class UserTimetablePage extends React.Component {
                     </Row>
                     <Row>
                         UserTimetableDay {this.state.pageNumber} Start {this.startDate} End {this.endDate}
+                        {this.state.jsonData.name} Start {this.state.jsonData.start} End {this.state.jsonData.finish}
+
                         {timetableDays}
                     </Row>
                 </Container>
