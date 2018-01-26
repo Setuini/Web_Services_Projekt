@@ -1,5 +1,6 @@
 import React from 'react';
 import {  } from 'reactstrap';
+import moment from 'moment';
 
 export class TimetableActivity extends React.Component {
     constructor(){
@@ -7,6 +8,7 @@ export class TimetableActivity extends React.Component {
         this.state = {
             heading: 'Placeholder Heading',
             img: '',
+            time: '',
             errors: '',
             fetchInProgress: false
         };
@@ -22,7 +24,8 @@ export class TimetableActivity extends React.Component {
         //console.log("TimetableActivity - Fetch");
         this.setState({
             heading: this.props.heading,
-            img: this.props.photo
+            img: this.props.photo,
+            time: this.props.time
         });
     }
 
@@ -33,9 +36,12 @@ export class TimetableActivity extends React.Component {
         } else {
             image = <img src={this.state.img} className="activity-img" alt=""/>;
         }
+        var startTime = moment(this.state.time[0]).subtract(1, "h").format("kk:mm");
+        var endTime = moment(this.state.time[1]).subtract(1, "h").format("kk:mm");
+
         return (
             <div>
-            <h3 className="activitiy-time">09:00 - 12:00</h3>
+            <h3 className="activitiy-time">{startTime} - {endTime}</h3>
             <div className="activity">
             <div className="activity-img-wrapper">
             {image}

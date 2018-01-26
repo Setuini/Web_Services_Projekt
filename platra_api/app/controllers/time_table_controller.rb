@@ -33,10 +33,10 @@ class TimeTableController < ApplicationController
             timetable.save
 
             params["timetable"].each do |date, activities|
-                activities.each do |activity, value|
-                    time_begin = Date.parse(date) + get_activity_time(activity)[0].seconds_since_midnight.seconds
-                    time_end = Date.parse(date) + get_activity_time(activity)[1].seconds_since_midnight.seconds
-                    saveTimeTableEntry(timetable.id, value["place_id"], time_begin, time_end, activity)
+                activities.each_with_index do |(activity, value), index|
+                    time_begin = Date.parse(date) + get_activity_time(index)[0].seconds_since_midnight.seconds
+                    time_end = Date.parse(date) + get_activity_time(index)[1].seconds_since_midnight.seconds
+                    saveTimeTableEntry(timetable.id, value["place_id"], time_begin, time_end, index)
                 end
             end
 
@@ -49,11 +49,10 @@ class TimeTableController < ApplicationController
     end
 
     def deleteTimeTable
-        msg = [];
-
+        msg[];
         if (TimeTable.exists?(name: params[:name], user_id: current_user.id))
             timetable = TimeTable.find_by user_id: current_user.id, name: params[:name]
-            timetable.destroy;
+            timetable.delete;
             msg.push('TimeTable deleted successfully');
             render json: { msg: msg.map(&:inspect).join(', ') }, status: 201
         else

@@ -185,7 +185,7 @@ class ApiEventsController < ApplicationController
             # multithread
             threads = []
             threads << Thread.new { 
-                day[0] = create_poi_object(restaurants[0], 0)
+                day[0] = create_poi_object(restaurants[rand(restaurants.length)], 0)
             }
 
             threads << Thread.new { 
@@ -193,7 +193,7 @@ class ApiEventsController < ApplicationController
             }
 
             threads << Thread.new { 
-                day[2] = create_poi_object(restaurants[1], 2)
+                day[2] = create_poi_object(restaurants[rand(restaurants.length)], 2)
             }
 
             threads << Thread.new { 
@@ -201,7 +201,7 @@ class ApiEventsController < ApplicationController
             }
 
             threads << Thread.new { 
-                day[4] = create_poi_object(restaurants[2], 4)
+                day[4] = create_poi_object(restaurants[rand(restaurants.length)], 4)
             }
 
             threads << Thread.new { 

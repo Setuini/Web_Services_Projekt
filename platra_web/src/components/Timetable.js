@@ -111,7 +111,7 @@ export class Timetable extends React.Component {
         mode: 'cors',
         body: JSON.stringify({
             timetable: data,
-            name: "test",
+            name: this.state.timetable_name,
             location: this.state.location
         })
     })
