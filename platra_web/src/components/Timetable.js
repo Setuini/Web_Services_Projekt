@@ -32,7 +32,6 @@ export class Timetable extends React.Component {
 
   }
 
-/* Merge not sure
   // Fetch Data for given Time (startDate -> endDate)
   componentDidMount(){
     var myHeaders = new Headers();
@@ -92,7 +91,7 @@ export class Timetable extends React.Component {
     }else{
       return undefined;
     }
-  }*/
+  }
 
   // save timetable
   saveTimetable() {
