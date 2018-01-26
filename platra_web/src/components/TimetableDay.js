@@ -10,16 +10,21 @@ export class TimetableDay extends React.Component {
       jsonData: this.props.jsonData,
       date: this.props.date,
       day: this.props.day,
-      len: this.props.col
+      len: this.props.col,
+      activities: this.props.activities
     }
   }
 
   render() {
     var activietesPerDay = 5;
     var timetableActivities = [];
-    for (var i = 0; i < activietesPerDay; i++) {
-        timetableActivities.push(<TimetableActivity key={i}/>);
-    }
+    var activities = this.state.activities;
+    Object.keys(activities).forEach(function(key) {
+        console.log(activities[key]);
+        var activity = activities[key];
+        timetableActivities.push(<TimetableActivity key={key} time={activity["time"]} heading={activity["name"]} photo={activity["photos"][0]}/>);
+    });
+    console.log(timetableActivities);
 
     //var len = parseInt(this.state.len, 10);
     //var col = "col-sm-"+(12/len);

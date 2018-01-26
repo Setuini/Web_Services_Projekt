@@ -37,12 +37,13 @@ class ApiEventsController < ApplicationController
 
     def initialize
         places_keys = [
-            'AIzaSyDloBMbRkCkmil3r6eitffzB9do1UtMDt4',
-            'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
-            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
             'AIzaSyDXKuWJmiXiD1yBY5qOsZDyg7Y3pVHtkC0',
-            'AIzaSyAkBjJvD-WB0wp3M3rCn7ylT2AETfPHAZg',
+            'AIzaSyDloBMbRkCkmil3r6eitffzB9do1UtMDt4',
+            'AIzaSyByU6NYzZ25mFtejOUWc1SUeTx-eyr6HJM',
+            'AIzaSyBfbjh992zNiaHpqvWCGJkx3ocgOcsvROU',
             'AIzaSyA0009rGVaq3T3uQ3f17TfrJX_IrtTjtvQ',
+            'AIzaSyAA7oeWdNhvVCIIk7SQE3IWKON7z4tA5Rg',
+            'AIzaSyAkBjJvD-WB0wp3M3rCn7ylT2AETfPHAZg',
         ]
 
         # loop over Places API keys to try to prevent over quota error
@@ -90,7 +91,7 @@ class ApiEventsController < ApplicationController
 
         #response = JSON.parse open("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{lat},#{lng}&type=park&rankby=distance&key=#{@places_api_key}").read
 
-        poi_cache_list = PointOfInterest.select("params").where("location = ? and types != ?", "Innsbruck", "null")
+        poi_cache_list = PointOfInterest.select("params").where("location = ? and types != ?", city, "null")
 
         return @places.spots(lat, lng, :types => types, :excludes => excludes)
         #return JSON.parse poi_cache_list.to_json
@@ -122,23 +123,41 @@ class ApiEventsController < ApplicationController
         distance = JSON.parse open("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=#{origins}&destinations=#{destinations}&key=#{@places_api_key}").read
     end
 
-    def create_poi_object(poi)
+    def get_activity_time(activity)
+        case activity
+        when 0 
+            return [Time.parse("08:00"), Time.parse("10:00")]
+        when 1 
+            return [Time.parse("10:00"), Time.parse("12:00")]
+        when 2 
+            return [Time.parse("12:00"), Time.parse("14:00")]
+        when 3 
+            return [Time.parse("14:00"), Time.parse("18:00")]
+        when 4 
+            return [Time.parse("18:00"), Time.parse("20:00")]
+        when 5 
+            return [Time.parse("20:00"), Time.parse("24:00")]
+        end
+    end
+
+    def create_poi_object(poi, activity_name)
         if poi == nil
             return nil
         end
 
-        #poi_details = get_poi_details(poi["place_id"])
+        poi_details = get_poi_details(poi["place_id"])
         poi_object = Hash.new
         poi_object["place_id"] = poi["place_id"]
         poi_object["lat"] = poi["lat"]
         poi_object["lng"] = poi["lng"]
         poi_object["name"] = poi["name"]
         poi_object["rating"] = poi["rating"]
-        #poi_object["photos"] = get_poi_photos(poi_details)
-        #poi_object["opening_hours"] = poi_details["opening_hours"] 
-        #poi_object["phone_number"] = poi_details["international_phone_number"]
+        poi_object["photos"] = get_poi_photos(poi_details)
+        poi_object["opening_hours"] = poi_details["opening_hours"] 
+        poi_object["phone_number"] = poi_details["international_phone_number"]
         poi_object["types"] = poi["types"]
         poi_object["outdoors"] = false 
+        poi_object["time"] = get_activity_time(activity_name)
 
         return poi_object
     end
@@ -146,9 +165,11 @@ class ApiEventsController < ApplicationController
     def show
         logger.debug params
 
-        from = Date.new(2018, 1, 23)
-        to = Date.new(2018, 1, 25)
+        from = Date.parse(params["startDate"])
+        to = Date.parse(params["endDate"])
         duration = to - from
+
+        location = params["location"]
 
         timetable = Hash.new
         duplicate_activities = []
@@ -156,44 +177,41 @@ class ApiEventsController < ApplicationController
 
             day = Hash.new
             exclude_activites = []
-            activities = get_poi("Innsbruck", [@types[rand(@types.length)], @types[rand(@types.length)], @types[rand(@types.length)]])
-            evening_activities = get_poi("Innsbruck", @evening_types)
-            restaurants = get_poi("Innsbruck", ["restaurant"])
+            activities = get_poi(location, [@types[rand(@types.length)], @types[rand(@types.length)], @types[rand(@types.length)]])
+            evening_activities = get_poi(location, @evening_types)
+            restaurants = get_poi(location, ["restaurant"])
 
             # multithread
             threads = []
             threads << Thread.new { 
-                day["breakfast"] = create_poi_object(restaurants[0])
+                day[0] = create_poi_object(restaurants[0], 0)
             }
 
             threads << Thread.new { 
-                day["morning_activity"] = create_poi_object(activities[rand(activities.length)]) 
+                day[1] = create_poi_object(activities[rand(activities.length)], 1) 
             }
 
             threads << Thread.new { 
-                day["lunch"] = create_poi_object(restaurants[1])
-            }
-
-
-            threads << Thread.new { 
-                day["afternoon_activity"] = create_poi_object(activities[rand(activities.length)]) 
+                day[2] = create_poi_object(restaurants[1], 2)
             }
 
             threads << Thread.new { 
-                day["dinner"] = create_poi_object(restaurants[2])
+                day[3] = create_poi_object(activities[rand(activities.length)], 3) 
             }
-
 
             threads << Thread.new { 
-                day["evening_activity"] = create_poi_object(evening_activities[rand(evening_activities.length)])
+                day[4] = create_poi_object(restaurants[2], "dinner", 4)
             }
 
+            threads << Thread.new { 
+                day[5] = create_poi_object(evening_activities[rand(evening_activities.length)], 5)
+            }
             threads.each {|t| t.join}
 
             for item in day
                 poi = item[1]
                 if poi && !(PointOfInterest.exists?(place_id: poi["place_id"]))
-                    poi_db = PointOfInterest.new(:location => "Innsbruck", :name => poi["name"], :longitude => poi["lng"], :latitude => poi["lat"], :place_id => poi["place_id"], :types => poi["types"], :params => poi.to_json);
+                    poi_db = PointOfInterest.new(:location => location, :name => poi["name"], :longitude => poi["lng"], :latitude => poi["lat"], :place_id => poi["place_id"], :types => poi["types"], :params => poi.to_json);
                   poi_db.save
                 end
 

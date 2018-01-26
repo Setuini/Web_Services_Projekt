@@ -16,8 +16,8 @@ export class Timetable extends React.Component {
       jsonData: '',
       data: '',
       errors: '',
-      fetchInProgress: false,
-      timetable_name: ''
+      timetable_name: '',
+      fetchInProgress: false
     };
 
     /*
@@ -163,14 +163,16 @@ export class Timetable extends React.Component {
 
   render() {
     var timetableDays = [];
-    var date = moment(this.state.startDate);
-    var len = moment(this.state.endDate).diff(date, 'd');
-    console.log(len);
-    for (var i=0; i < len; i++) {
-        date = moment(this.state.startDate).add(i,'d').format("DD/MM/YYYY");
-        var day = this.getDay(moment(this.state.startDate).add(i,'days').day());
-        timetableDays.push(<TimetableDay day={day} date={date} col={len} key={i}/>);
-    }
+    //var date = moment(this.state.startDate);
+    //var len = moment(this.state.endDate).diff(date, 'd');
+    //console.log(len);
+    var data = this.state.data;
+    Object.keys(data).forEach(function(key, day) {
+        var date = moment(key).format("DD/MM/YYYY");
+        var weekday = moment(key).format("dddd");
+        timetableDays.push(<TimetableDay activities={data[key]} day={weekday} date={date} />);
+    });
+
     return (
         <Container>
           <Row>
