@@ -115,7 +115,7 @@ export class UserTimetableActivity extends React.Component {
                     <div className="activity-text-wrapper">
                         <h3 className="activity-heading"> {this.state.heading} </h3>
                         <p className="activity-description">{this.state.desc}</p>
-                        <LocationModal lat={this.state.data.point_of_interest.latitude} lng={this.state.data.point_of_interest.longitude} lat2={this.state.data.point_of_interest.latitude} lng2={this.state.data.point_of_interest.longitud} />
+                        <LocationModal lat={this.state.data.point_of_interest.latitude} lng={this.state.data.point_of_interest.longitude} lat2={this.state.data.point_of_interest.latitude} lng2={this.state.data.point_of_interest.longitude} />
                         <button onClick={this.delete}>Delete</button>
                     </div>
                 </div>
