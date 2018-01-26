@@ -97,7 +97,7 @@ export class UserTimetableActivity extends React.Component {
             var p = this.state.data.point_of_interest.params;
             if(typeof p !== 'undefined'){
                 var i = JSON.parse(p);
-                if(typeof i !== 'undefined' && i.photos.length >0){
+                if(i != null && typeof i !== 'undefined' && i.photos.length >0){
                     this.state.img = i.photos[0]
                 }
             }

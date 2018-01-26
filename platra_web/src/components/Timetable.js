@@ -172,6 +172,14 @@ export class Timetable extends React.Component {
         timetableDays.push(<TimetableDay activities={data[key]} day={weekday} date={date} />);
     });
 
+    this.loadAnimation;
+    if(this.state.fetchInProgress == true){
+      console.log("loader");
+      this.loadAnimation = <div className="loader-wrapper"><div className="loader"><div className="largeBox"></div><div className="smallBox"></div></div></div>;
+    }else{
+      this.loadAnimation = null;
+    }
+
     return (
         <Container>
           <Row>
@@ -183,6 +191,7 @@ export class Timetable extends React.Component {
             </Col>
           </Row>
           <Row>
+            {this.loadAnimation}
             <OwlCarousel className="owl-theme" margin={10} nav>
               {timetableDays}
             </OwlCarousel>

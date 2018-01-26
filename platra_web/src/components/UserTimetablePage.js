@@ -100,7 +100,17 @@ export class UserTimetablePage extends React.Component {
                         <Button onClick={this.prevPage}>Prev</Button>
                         <Button onClick={this.nextPage}>Next</Button>
                         <Button onClick={this.deletePage}>Delete</Button>
-                        UserTimetableDay {this.state.pageNumber} Start {this.startDate} End {this.endDate}
+                    </Row>
+                    <Row>
+                        {this.state.name} {this.state.pageNumber}
+                    </Row>
+                    <Row>
+                        Start {this.state.jsonData.start}
+                    </Row>
+                    <Row>
+                        End {this.state.jsonData.finish}
+                    </Row>
+                    <Row>
                         {timetableDays}
                     </Row>
                 </Container>
