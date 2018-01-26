@@ -29,7 +29,7 @@ class TimeTableController < ApplicationController
         msg = [];
 
         if !(TimeTable.exists?(name: params[:name], user_id: current_user.id))
-            timetable = TimeTable.new(:user_id => current_user.id, :name => params[:name], :location => params[:location]);
+            timetable = TimeTable.new(:user_id => current_user.id, :name => params[:name], :location => params[:location], :start => params[:start], :finish => params[:end]);
             timetable.save
 
             params["timetable"].each do |date, activities|
@@ -52,7 +52,7 @@ class TimeTableController < ApplicationController
     end
 
     def deleteTimeTable
-        msg[];
+        msg = [];
         if (TimeTable.exists?(name: params[:name], user_id: current_user.id))
             timetable = TimeTable.find_by user_id: current_user.id, name: params[:name]
             timetable.delete;

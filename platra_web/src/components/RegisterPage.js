@@ -104,12 +104,6 @@ export class RegisterPage extends React.Component {
                 <Input type="password" name="password_validate" placeholder="Password confirmation" onChange={this.handleChange} required/>
               </FormGroup>
             
-              <FormGroup check>
-                <Label check>
-                  <Input type="checkbox"/>{' '}
-                  Accept Terms and conditions
-                </Label>
-              </FormGroup>
 
               <Row>
                 <Col>

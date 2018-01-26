@@ -48,7 +48,7 @@ export class Search extends React.Component {
       <div>
         <h1 className="Heading-Main">PlaTra</h1>
         <p className="Heading-Sub">Let us help to plan your holiday</p>
-        <p className="Heading-Sub">We create a timetable with restaurants and points of interest for you, which you can than edit and store.</p>
+        <p className="Heading-Sub">We create a timetable with restaurants and points of interest for you, which you can than store.</p>
         <form id="search-form">
           <Row>
               <Col xs="12" lg="6">

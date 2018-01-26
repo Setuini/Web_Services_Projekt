@@ -29,7 +29,6 @@ export class NavbarPlatraLoggedIn extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <Link className="nav-link" to="/usertimetable">Timetables</Link>
-              <Link className="nav-link" to="/">Profile</Link>
               <Link className="nav-link" to="/" onClick={this.onLogout}>Logout</Link>
             </Nav>
           </Collapse>

@@ -94,7 +94,6 @@ export class LoginPage extends React.Component {
                     Stay logged in
                   </Label>
                 </FormGroup>
-                <Link to="/" className='col-6 text-right'>Forgot your password?</Link>
               </Row>
 
               <Row>

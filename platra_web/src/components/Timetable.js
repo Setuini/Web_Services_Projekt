@@ -110,6 +110,8 @@ export class Timetable extends React.Component {
         headers: myHeaders,
         mode: 'cors',
         body: JSON.stringify({
+            start: this.state.startDate,
+            end: this.state.endDate,
             timetable: data,
             name: this.state.timetable_name,
             location: this.state.location

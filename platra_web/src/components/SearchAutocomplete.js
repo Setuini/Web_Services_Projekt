@@ -9,7 +9,7 @@ export class SearchAutocomplete extends Component {
     const inputProps = {
       value: this.props.location,
       onChange: this.props.onChange,
-      placeholder: "Enter for Example Innsbrck"
+      placeholder: "Enter for Example Innsbruck"
     }
 
     const timetable_to = {
